@@ -8,7 +8,23 @@
 import UIKit
 
 final class ListViewController: BaseViewController {
+    private lazy var rightBarbutton = UIBarButtonItem(
+        image: UIImage(systemName: "ellipsis.circle"),
+        style: .plain,
+        target: self,
+        action: #selector(rightBarButtonTapped)
+    )
     
+    override func configureUI() {
+        super.configureUI()
+        
+        navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    @objc
+    func rightBarButtonTapped() {
+        
+    }
 }
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {

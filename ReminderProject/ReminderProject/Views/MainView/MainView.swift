@@ -10,14 +10,55 @@ import UIKit
 import SnapKit
 
 final class MainView: BaseView {
-    let titleLabel = UILabel()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionView.flowLayout(spacing: 16, numberOfItemsInRow: 2, heightMultiplier: 0.5))
+    private let titleLabel = {
+        let label = UILabel()
+        label.text = "전체"
+        label.font = .systemFont(ofSize: 32, weight: .semibold)
+        label.textColor = .gray
+        return label
+    }()
+    
+    private let collectionView = {
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionView.flowLayout(
+                spacing: 16,
+                numberOfItemsInRow: 2,
+                heightMultiplier: 0.5
+            ))
+        collectionView.backgroundColor = .clear
+        
+        return collectionView
+    }()
+    
+    private let newTodoButton = {
+        let button = UIButton()
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: "plus.circle.fill")
+        config.title = "새로운 할 일"
+        config.imagePlacement = .leading
+        config.imagePadding = 8
+        button.configuration = config
+        
+        return button
+    }()
+    
+    private let addListButton = {
+        let button = UIButton()
+        var config = UIButton.Configuration.plain()
+        config.title = "목록 추가"
+        
+        button.configuration = config
+        return button
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(titleLabel)
         self.addSubview(collectionView)
+        self.addSubview(newTodoButton)
+        self.addSubview(addListButton)
     }
     
     
@@ -32,18 +73,37 @@ final class MainView: BaseView {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
                 .offset(20)
-            $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        newTodoButton.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom)
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+                .offset(-16)
+        }
+        
+        addListButton.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom)
+            $0.trailing.equalTo(titleLabel.snp.trailing)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+                .offset(-16)
         }
     }
     
     override func configureUI() {
         super.configureUI()
         
-        titleLabel.text = "전체"
-        titleLabel.font = .systemFont(ofSize: 32, weight: .semibold)
-        titleLabel.textColor = .gray
-        
-        collectionView.backgroundColor = .clear
+        newTodoButton.addTarget(
+            self,
+            action: #selector(newTodoButtonTapped),
+            for: .touchUpInside
+        )
+        addListButton.addTarget(
+            self,
+            action: #selector(addListButtonTapped),
+            for: .touchUpInside
+        )
     }
     
     override func configureDelegate(_ vc: BaseViewController?) {
@@ -54,5 +114,17 @@ final class MainView: BaseView {
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+    }
+    
+    @objc
+    func newTodoButtonTapped() {
+        let nextViewController = RegisterViewController(baseView: RegisterView())
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        NavigationManager.shared.presentVC(navigationController)
+    }
+    
+    @objc
+    func addListButtonTapped() {
+        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()))
     }
 }
