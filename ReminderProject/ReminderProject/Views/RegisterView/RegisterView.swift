@@ -10,18 +10,19 @@ import UIKit
 import SnapKit
 
 final class RegisterView: BaseView {
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionView.flowLayout(spacing: 12, numberOfItemsInRow: 1, heightMultiplier: 0.13))
+//    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionView.flowLayout(spacing: 12, numberOfItemsInRow: 1, heightMultiplier: 0.13))
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        self.addSubview(collectionView)
+        self.addSubview(tableView)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
-        collectionView.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.edges.equalTo(self.safeAreaLayoutGuide)
                 .inset(8)
         }
@@ -32,7 +33,7 @@ final class RegisterView: BaseView {
         
         self.backgroundColor = .black
         
-        collectionView.backgroundColor = .clear
+        tableView.backgroundColor = .clear
     }
     
     override func configureDelegate(_ vc: BaseViewController? = nil) {
@@ -40,10 +41,14 @@ final class RegisterView: BaseView {
         
         self.delegate = vc
         
-        collectionView.delegate = delegate as? UICollectionViewDelegate
-        collectionView.dataSource = delegate as? UICollectionViewDataSource
-        collectionView.register(RegisterOpenedCell.self, forCellWithReuseIdentifier: RegisterOpenedCell.identifier)
-        collectionView.register(RegisterDisclosureCell.self, forCellWithReuseIdentifier: RegisterDisclosureCell.identifier)
+//        collectionView.delegate = delegate as? UICollectionViewDelegate
+//        collectionView.dataSource = delegate as? UICollectionViewDataSource
+//        collectionView.register(RegisterOpenedCell.self, forCellWithReuseIdentifier: RegisterOpenedCell.identifier)
+//        collectionView.register(RegisterDisclosureCell.self, forCellWithReuseIdentifier: RegisterDisclosureCell.identifier)
+        tableView.delegate = delegate as? UITableViewDelegate
+        tableView.dataSource = delegate as? UITableViewDataSource
+        tableView.register(RegisterOpenedCell.self, forCellReuseIdentifier: RegisterOpenedCell.identifier)
+        tableView.register(RegisterDisclosureCell.self, forCellReuseIdentifier: RegisterDisclosureCell.identifier)
     }
 }
 

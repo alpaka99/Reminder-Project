@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class RegisterDisclosureCell: BaseCollectionViewCell {
+final class RegisterDisclosureCell: BaseTableViewCell {
     let title = UILabel()
     let trailingButton = UIButton()
     
@@ -25,16 +25,16 @@ final class RegisterDisclosureCell: BaseCollectionViewCell {
         
         title.snp.makeConstraints {
             $0.leading.equalTo(contentView.snp.leading)
-                .offset(8)
+                .offset(16)
             $0.verticalEdges.equalTo(contentView.snp.verticalEdges)
-                .inset(8)
+                .inset(16)
         }
         
         trailingButton.snp.makeConstraints {
             $0.verticalEdges.equalTo(contentView.snp.verticalEdges)
-                .inset(8)
+                .inset(16)
             $0.trailing.equalTo(contentView.snp.trailing)
-                .inset(8)
+                .inset(16)
             $0.width.equalTo(trailingButton.snp.height)
                 .multipliedBy(1)
         }

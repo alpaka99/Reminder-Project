@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class RegisterOpenedCell: BaseCollectionViewCell {
+final class RegisterOpenedCell: BaseTableViewCell {
     let textField = UITextField()
     let divider = UIView()
     let textView = UITextView()
