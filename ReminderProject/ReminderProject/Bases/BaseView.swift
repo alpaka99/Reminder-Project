@@ -33,7 +33,7 @@ class BaseView: UIView {
     }
     
     internal func configureUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .black
     }
     
     internal func configureDelegate(_ vc: BaseViewController? = nil) {

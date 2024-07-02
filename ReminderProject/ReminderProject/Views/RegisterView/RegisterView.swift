@@ -36,8 +36,6 @@ final class RegisterView: BaseView {
     override func configureUI() {
         super.configureUI()
         
-        self.backgroundColor = .black
-        
         stackView.backgroundColor = .clear
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -45,7 +43,6 @@ final class RegisterView: BaseView {
     }
     
     func configureArrandedSubViews() {
-        
         stackView.addArrangedSubview(memoView)
         
         RegisterFieldType.allCases.forEach { type in

@@ -9,10 +9,6 @@ import UIKit
 
 final class MainViewController: BaseViewController {
     let categories: [TodoCategory] = TodoCategory.allCases
-    override func configureDelegate() {
-        super.configureDelegate()
-        
-    }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {

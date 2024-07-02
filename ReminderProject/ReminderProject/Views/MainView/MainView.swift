@@ -39,8 +39,6 @@ final class MainView: BaseView {
     override func configureUI() {
         super.configureUI()
         
-        self.backgroundColor = .black
-        
         titleLabel.text = "전체"
         titleLabel.font = .systemFont(ofSize: 32, weight: .semibold)
         titleLabel.textColor = .gray
