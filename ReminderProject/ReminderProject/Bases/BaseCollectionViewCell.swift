@@ -11,6 +11,11 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        configureHierarchy()
+        configureLayout()
+        configureUI()
+        configureDelegate()
     }
     
     required init?(coder: NSCoder) {

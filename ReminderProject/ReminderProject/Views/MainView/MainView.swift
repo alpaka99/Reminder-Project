@@ -54,6 +54,7 @@ final class MainView: BaseView {
         collectionView.delegate = vc as? any UICollectionViewDelegate
         collectionView.dataSource = vc as? any UICollectionViewDataSource
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
+        collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.identifier)
     }
 }
