@@ -50,7 +50,7 @@ class BaseViewController: UIViewController {
     }
     
     internal func configureDelegate() {
-        baseView?.delegate = self
+        baseView?.configureDelegate(self)
     }
 }
 
