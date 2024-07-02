@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  BaseCollectionViewCell.swift
 //  ReminderProject
 //
 //  Created by user on 7/2/24.
@@ -7,11 +7,9 @@
 
 import UIKit
 
-class BaseView: UIView {
-    weak var delegate: BaseViewDelegate?
-    
+class BaseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         
         configureHierarchy()
         configureLayout()
@@ -33,15 +31,10 @@ class BaseView: UIView {
     }
     
     internal func configureUI() {
-        self.backgroundColor = .black
+        
     }
     
-    internal func configureDelegate(_ vc: BaseViewController? = nil) {
-        self.delegate = vc
+    internal func configureDelegate() {
+        
     }
-}
-
-
-protocol BaseViewDelegate: BaseViewController {
-    func configureDelegate()
 }

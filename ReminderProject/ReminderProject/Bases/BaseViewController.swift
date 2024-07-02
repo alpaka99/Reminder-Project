@@ -18,6 +18,7 @@ class BaseViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(iOS, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,7 +51,7 @@ class BaseViewController: UIViewController {
     }
     
     internal func configureDelegate() {
-        baseView?.delegate = self
+        baseView?.configureDelegate(self)
     }
 }
 
