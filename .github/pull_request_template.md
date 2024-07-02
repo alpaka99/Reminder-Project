@@ -1,17 +1,30 @@
-## 개요 및 관련 이슈
-<!-- Issue Link: #1 -->
-<!-- Figma: Link (선택) -->
+## 🌱 *Pull requests*
 
-<!-- Notion Card: Link (선택) -->
+🌿 **작업한 브랜치**
+<!-- Work Branch -->
 
-| ⚒️ Title | <!-- title --> | 
-| :--- | :--- |
-| 📜 **Description** | <!-- Description --> |
-| 📌 **Issue Number** | <!-- issue Number --> |
-| 관련 이미지 | <!-- related Image --> |
+<br></br>
 
----
+## 🔍 **작업한 결과**
+<!-- Write down what was done on this Branch -->
 
-## 작업 결과
+<br></br>
+## 🔫 **Trouble Shooting**
+<!-- Any TroubleShooting Process -->
 
-#### 기타 공유사항
+<br></br>
+## 🔊 기타 공유사항
+<!-- Any Information To Share -->
+
+<br></br>
+<!-- 이미지 자료가 있다면 적어주세요
+## 📸 스크린샷
+|기능|스크린샷|
+|:--:|:--:|
+||<img src = "">
+||<img src = "">
+<br></br>
+-->
+
+## 📟 관련 이슈
+- Resolved: 
