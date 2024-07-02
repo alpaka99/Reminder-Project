@@ -7,15 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = .systemOrange
     }
 
-
+    override func configureUI() {
+        super.configureUI()
+        view.backgroundColor = .systemOrange
+    }
 }
 
