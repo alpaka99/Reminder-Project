@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainViewController: BaseViewController {
-    
+    let categories: [TodoCategory] = TodoCategory.allCases
     override func configureDelegate() {
         super.configureDelegate()
         
@@ -17,13 +17,15 @@ final class MainViewController: BaseViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.identifier, for: indexPath) as? MainCollectionCell else { return UICollectionViewCell() }
         
-        cell.backgroundColor = .systemGray.withAlphaComponent(0.5)
+        let type = categories[indexPath.row]
+        cell.configureData(type)
+        
         return cell
     }
 }

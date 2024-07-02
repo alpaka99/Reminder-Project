@@ -23,6 +23,7 @@
 		CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */; };
 		CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A32C3408D0004BFBE1 /* Reusable.swift */; };
 		CED1E0A72C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */; };
+		CED1E0A92C340DEE004BFBE1 /* TodoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CED1E0A32C3408D0004BFBE1 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
+		CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				CED1E09C2C33FEF9004BFBE1 /* Constants.swift */,
+				CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
 				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
 				CED1E09F2C34059D004BFBE1 /* MainCollectionCell.swift in Sources */,
+				CED1E0A92C340DEE004BFBE1 /* TodoCategory.swift in Sources */,
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
 				CED1E0752C33E79C004BFBE1 /* SceneDelegate.swift in Sources */,
