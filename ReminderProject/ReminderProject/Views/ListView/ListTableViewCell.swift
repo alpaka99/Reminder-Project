@@ -73,20 +73,27 @@ final class ListTableViewCell: BaseTableViewCell {
         
         toggleButton.setImage(UIImage(systemName: "circle"), for: .normal)
         
-        title.text = "키보드 구매"
+        
         title.font = .systemFont(ofSize: 16, weight: .semibold)
         title.textColor = .white
         
-        content.text = "예쁜 키캡 알아보기"
+        
         content.font = .systemFont(ofSize: 12, weight: .medium)
         content.textColor = .systemGray4
         
-        dateLabel.text = Date.now.formatted()
+        
         dateLabel.font = .systemFont(ofSize: 12, weight: .medium)
         dateLabel.textColor = .systemGray4
         
-        tagLabel.text = "#쇼핑"
+        
         tagLabel.font = .systemFont(ofSize: 12, weight: .semibold)
         tagLabel.textColor = .systemBlue
+    }
+    
+    func configureData(_ data: Todos) {
+        title.text = data.title
+        content.text = data.content
+        dateLabel.text = data.createdAt.formatted()
+        tagLabel.text = "#쇼핑"
     }
 }

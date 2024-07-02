@@ -44,9 +44,36 @@ final class RegisterViewController: BaseViewController {
         NavigationManager.shared.dismiss(animated: true)
     }
     
+    // MARK: Fetch TextField from baseView
     @objc
     func addButtonTapped() {
-        print(#function)
+        RealmManager.shared.create(Todos(
+            category: "전체",
+            title: "test",
+            content: "내용"
+        ))
+        NavigationManager.shared.dismiss(animated: true)
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let text = textField.text, text.isEmpty == true {
+            rightBarButton.isEnabled = false
+        }
+         else {
+            rightBarButton.isEnabled = true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text, text.isEmpty == true {
+            rightBarButton.isEnabled = false
+        }
+         else {
+            rightBarButton.isEnabled = true
+        }
+        
     }
 }
 

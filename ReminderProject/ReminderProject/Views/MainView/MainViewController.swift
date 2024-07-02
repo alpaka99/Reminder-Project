@@ -9,7 +9,14 @@ import UIKit
 
 final class MainViewController: BaseViewController {
     private let categories: [TodoCategory] = TodoCategory.allCases
-    private lazy var rightBarbutton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+    
+    private lazy var rightBarbutton = UIBarButtonItem(
+        image: UIImage(systemName: "ellipsis.circle"),
+        style: .plain,
+        target: self,
+        action: #selector(rightBarButtonTapped)
+    )
+    
     
     override func configureUI() {
         super.configureUI()

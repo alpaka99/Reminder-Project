@@ -71,6 +71,7 @@ final class RegisterOpenedCell: BaseView {
     override func configureDelegate(_ vc: BaseViewController? = nil) {
         super.configureDelegate()
         
+        textField.delegate = vc as? any UITextFieldDelegate
         textView.delegate = vc as? any UITextViewDelegate
     }
 }
