@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class MainCollectionCell: BaseCollectionViewCell {
+final class MainCollectionViewCell: BaseCollectionViewCell {
     let iconBackground = UIView()
     let icon = UIImageView()
     let title = UILabel()

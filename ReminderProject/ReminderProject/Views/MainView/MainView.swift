@@ -55,6 +55,6 @@ final class MainView: BaseView {
         collectionView.dataSource = vc as? any UICollectionViewDataSource
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
-        collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.identifier)
+        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
     }
 }

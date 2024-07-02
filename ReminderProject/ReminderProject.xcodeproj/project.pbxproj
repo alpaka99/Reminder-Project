@@ -19,11 +19,16 @@
 		CED1E0982C33FA98004BFBE1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0972C33FA98004BFBE1 /* MainViewController.swift */; };
 		CED1E09A2C33FAA9004BFBE1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0992C33FAA9004BFBE1 /* MainView.swift */; };
 		CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E09C2C33FEF9004BFBE1 /* Constants.swift */; };
-		CED1E09F2C34059D004BFBE1 /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E09E2C34059D004BFBE1 /* MainCollectionCell.swift */; };
+		CED1E09F2C34059D004BFBE1 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E09E2C34059D004BFBE1 /* MainCollectionViewCell.swift */; };
 		CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */; };
 		CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A32C3408D0004BFBE1 /* Reusable.swift */; };
 		CED1E0A72C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */; };
 		CED1E0A92C340DEE004BFBE1 /* TodoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */; };
+		CED1E0AC2C341555004BFBE1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0AB2C341555004BFBE1 /* RegisterViewController.swift */; };
+		CED1E0AE2C34156B004BFBE1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0AD2C34156B004BFBE1 /* RegisterView.swift */; };
+		CED1E0B02C341CDC004BFBE1 /* RegisterDisclosureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0AF2C341CDC004BFBE1 /* RegisterDisclosureCell.swift */; };
+		CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0B32C341ED3004BFBE1 /* BaseTableViewCell.swift */; };
+		CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0B52C342DD1004BFBE1 /* RegisterOpenedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +44,16 @@
 		CED1E0972C33FA98004BFBE1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CED1E0992C33FAA9004BFBE1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CED1E09C2C33FEF9004BFBE1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CED1E09E2C34059D004BFBE1 /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
+		CED1E09E2C34059D004BFBE1 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CED1E0A32C3408D0004BFBE1 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCategory.swift; sourceTree = "<group>"; };
+		CED1E0AB2C341555004BFBE1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CED1E0AD2C34156B004BFBE1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		CED1E0AF2C341CDC004BFBE1 /* RegisterDisclosureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDisclosureCell.swift; sourceTree = "<group>"; };
+		CED1E0B32C341ED3004BFBE1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CED1E0B52C342DD1004BFBE1 /* RegisterOpenedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterOpenedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +109,7 @@
 				CED1E08F2C33EFE5004BFBE1 /* BaseViewController.swift */,
 				CED1E0912C33F056004BFBE1 /* BaseView.swift */,
 				CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */,
+				CED1E0B32C341ED3004BFBE1 /* BaseTableViewCell.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -106,6 +117,7 @@
 		CED1E0952C33FA88004BFBE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E0AA2C34153F004BFBE1 /* RegisterView */,
 				CED1E0962C33FA91004BFBE1 /* MainView */,
 			);
 			path = Views;
@@ -116,7 +128,7 @@
 			children = (
 				CED1E0972C33FA98004BFBE1 /* MainViewController.swift */,
 				CED1E0992C33FAA9004BFBE1 /* MainView.swift */,
-				CED1E09E2C34059D004BFBE1 /* MainCollectionCell.swift */,
+				CED1E09E2C34059D004BFBE1 /* MainCollectionViewCell.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -144,6 +156,17 @@
 				CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CED1E0AA2C34153F004BFBE1 /* RegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E0AB2C341555004BFBE1 /* RegisterViewController.swift */,
+				CED1E0AD2C34156B004BFBE1 /* RegisterView.swift */,
+				CED1E0AF2C341CDC004BFBE1 /* RegisterDisclosureCell.swift */,
+				CED1E0B52C342DD1004BFBE1 /* RegisterOpenedCell.swift */,
+			);
+			path = RegisterView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,16 +248,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
 				CED1E0982C33FA98004BFBE1 /* MainViewController.swift in Sources */,
 				CED1E09A2C33FAA9004BFBE1 /* MainView.swift in Sources */,
 				CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */,
+				CED1E0AE2C34156B004BFBE1 /* RegisterView.swift in Sources */,
 				CED1E0902C33EFE5004BFBE1 /* BaseViewController.swift in Sources */,
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
+				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
 				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
-				CED1E09F2C34059D004BFBE1 /* MainCollectionCell.swift in Sources */,
+				CED1E09F2C34059D004BFBE1 /* MainCollectionViewCell.swift in Sources */,
+				CED1E0B02C341CDC004BFBE1 /* RegisterDisclosureCell.swift in Sources */,
 				CED1E0A92C340DEE004BFBE1 /* TodoCategory.swift in Sources */,
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
+				CED1E0AC2C341555004BFBE1 /* RegisterViewController.swift in Sources */,
 				CED1E0752C33E79C004BFBE1 /* SceneDelegate.swift in Sources */,
 				CED1E0A72C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift in Sources */,
 			);
