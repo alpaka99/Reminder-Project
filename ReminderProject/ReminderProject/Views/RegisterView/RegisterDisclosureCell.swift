@@ -9,31 +9,31 @@ import UIKit
 
 import SnapKit
 
-final class RegisterDisclosureCell: BaseTableViewCell {
-    let title = UILabel()
-    let trailingButton = UIButton()
+final class RegisterDisclosureCell: BaseView {
+    private let title = UILabel()
+    private let trailingButton = UIButton()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        contentView.addSubview(title)
-        contentView.addSubview(trailingButton)
+        self.addSubview(title)
+        self.addSubview(trailingButton)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
         title.snp.makeConstraints {
-            $0.leading.equalTo(contentView.snp.leading)
+            $0.leading.equalTo(self.snp.leading)
                 .offset(16)
-            $0.verticalEdges.equalTo(contentView.snp.verticalEdges)
+            $0.verticalEdges.equalTo(self.snp.verticalEdges)
                 .inset(16)
         }
         
         trailingButton.snp.makeConstraints {
-            $0.verticalEdges.equalTo(contentView.snp.verticalEdges)
+            $0.verticalEdges.equalTo(self.snp.verticalEdges)
                 .inset(16)
-            $0.trailing.equalTo(contentView.snp.trailing)
+            $0.trailing.equalTo(self.snp.trailing)
                 .inset(16)
             $0.width.equalTo(trailingButton.snp.height)
                 .multipliedBy(1)
@@ -49,8 +49,13 @@ final class RegisterDisclosureCell: BaseTableViewCell {
         
         title.text = "타이틀"
         title.textColor = .systemGray4
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
+        title.font = .systemFont(ofSize: 16, weight: .semibold)
         
         trailingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        trailingButton.tintColor = .systemGray4
+    }
+    
+    func configureData(_ type: RegisterFieldType) {
+        title.text = type.title
     }
 }
