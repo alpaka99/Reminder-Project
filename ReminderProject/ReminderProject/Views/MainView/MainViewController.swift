@@ -8,7 +8,18 @@
 import UIKit
 
 final class MainViewController: BaseViewController {
-    let categories: [TodoCategory] = TodoCategory.allCases
+    private let categories: [TodoCategory] = TodoCategory.allCases
+    private lazy var rightBarbutton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+    
+    override func configureUI() {
+        super.configureUI()
+        
+        navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    @objc func rightBarButtonTapped() {
+        print(#function)
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {

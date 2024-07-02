@@ -30,11 +30,14 @@ final class RegisterView: BaseView {
         
         stackView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+                .inset(16)
         }
     }
     
     override func configureUI() {
         super.configureUI()
+        
+        self.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
         
         stackView.backgroundColor = .clear
         stackView.axis = .vertical

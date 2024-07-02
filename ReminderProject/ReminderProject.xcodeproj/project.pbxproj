@@ -32,6 +32,7 @@
 		CED1E0B92C345386004BFBE1 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0B82C345386004BFBE1 /* ListViewController.swift */; };
 		CED1E0BB2C34538B004BFBE1 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0BA2C34538B004BFBE1 /* ListView.swift */; };
 		CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0BC2C34596B004BFBE1 /* ListTableViewCell.swift */; };
+		CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0BF2C346ABC004BFBE1 /* NavigationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		CED1E0B82C345386004BFBE1 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		CED1E0BA2C34538B004BFBE1 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CED1E0BC2C34596B004BFBE1 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		CED1E0BF2C346ABC004BFBE1 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		CED1E0712C33E79C004BFBE1 /* ReminderProject */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E0BE2C346AB5004BFBE1 /* Managers */,
 				CED1E0A52C3409CB004BFBE1 /* Extensions */,
 				CED1E0A22C3408C9004BFBE1 /* Protocols */,
 				CED1E09B2C33FEF4004BFBE1 /* Constants */,
@@ -186,6 +189,14 @@
 			path = ListView;
 			sourceTree = "<group>";
 		};
+		CED1E0BE2C346AB5004BFBE1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E0BF2C346ABC004BFBE1 /* NavigationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -267,6 +278,7 @@
 			files = (
 				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
 				CED1E0BB2C34538B004BFBE1 /* ListView.swift in Sources */,
+				CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */,
 				CED1E0982C33FA98004BFBE1 /* MainViewController.swift in Sources */,
 				CED1E09A2C33FAA9004BFBE1 /* MainView.swift in Sources */,
 				CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */,
