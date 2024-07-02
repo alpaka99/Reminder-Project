@@ -8,7 +8,7 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    private var baseView: BaseView! // force unwrapping 바꾸는 방법 생각해보기
+    private var baseView: BaseView? // force unwrapping 바꾸는 방법 생각해보기
     
     override func loadView() {
         self.view = baseView
@@ -50,7 +50,7 @@ class BaseViewController: UIViewController {
     }
     
     internal func configureDelegate() {
-        baseView.delegate = self
+        baseView?.delegate = self
     }
 }
 
