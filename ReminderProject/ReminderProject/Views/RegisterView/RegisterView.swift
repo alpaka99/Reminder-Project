@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class RegisterView: BaseView {
-    let memoView = RegisterOpenedCell()
+    private let memoView = RegisterOpenedCell()
     private lazy var stackView = UIStackView()
     
     override init(frame: CGRect) {

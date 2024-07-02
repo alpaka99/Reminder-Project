@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 final class RegisterOpenedCell: BaseView {
-    let textField = UITextField()
-    let divider = UIView()
-    let textView = UITextView()
+    private let textField = UITextField()
+    private let divider = UIView()
+    private let textView = UITextView()
     
     override func configureHierarchy() {
         super.configureHierarchy()

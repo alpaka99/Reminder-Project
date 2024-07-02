@@ -8,7 +8,7 @@
 import UIKit
 
 final class RegisterViewController: BaseViewController {
-    let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
+    private let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
 }
 
 extension RegisterViewController: UITextViewDelegate {
