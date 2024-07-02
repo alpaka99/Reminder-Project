@@ -15,6 +15,9 @@
 		CED1E0872C33E8A2004BFBE1 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = CED1E0862C33E8A2004BFBE1 /* .gitIgnore */; };
 		CED1E08A2C33E968004BFBE1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CED1E0892C33E968004BFBE1 /* SnapKit */; };
 		CED1E08D2C33E989004BFBE1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CED1E08C2C33E989004BFBE1 /* RealmSwift */; };
+		CED1E0902C33EFE5004BFBE1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E08F2C33EFE5004BFBE1 /* BaseViewController.swift */; };
+		CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0912C33F056004BFBE1 /* BaseView.swift */; };
+		CED1E0942C33F365004BFBE1 /* TestBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0932C33F365004BFBE1 /* TestBaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		CED1E07E2C33E79D004BFBE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CED1E0802C33E79D004BFBE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED1E0862C33E8A2004BFBE1 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		CED1E08F2C33EFE5004BFBE1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CED1E0912C33F056004BFBE1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		CED1E0932C33F365004BFBE1 /* TestBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,14 +67,25 @@
 		CED1E0712C33E79C004BFBE1 /* ReminderProject */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E08E2C33EFD9004BFBE1 /* Bases */,
 				CED1E0722C33E79C004BFBE1 /* AppDelegate.swift */,
 				CED1E0742C33E79C004BFBE1 /* SceneDelegate.swift */,
 				CED1E0762C33E79C004BFBE1 /* ViewController.swift */,
 				CED1E07B2C33E79D004BFBE1 /* Assets.xcassets */,
 				CED1E07D2C33E79D004BFBE1 /* LaunchScreen.storyboard */,
 				CED1E0802C33E79D004BFBE1 /* Info.plist */,
+				CED1E0932C33F365004BFBE1 /* TestBaseView.swift */,
 			);
 			path = ReminderProject;
+			sourceTree = "<group>";
+		};
+		CED1E08E2C33EFD9004BFBE1 /* Bases */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E08F2C33EFE5004BFBE1 /* BaseViewController.swift */,
+				CED1E0912C33F056004BFBE1 /* BaseView.swift */,
+			);
+			path = Bases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED1E0772C33E79C004BFBE1 /* ViewController.swift in Sources */,
+				CED1E0942C33F365004BFBE1 /* TestBaseView.swift in Sources */,
+				CED1E0902C33EFE5004BFBE1 /* BaseViewController.swift in Sources */,
+				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
 				CED1E0752C33E79C004BFBE1 /* SceneDelegate.swift in Sources */,
 			);
