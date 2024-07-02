@@ -5,4 +5,31 @@
 //  Created by user on 7/2/24.
 //
 
-import Foundation
+import UIKit
+
+class BaseCollectionViewCell: UICollectionViewCell {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    internal func configureHierarchy() {
+        
+    }
+    
+    internal func configureLayout() {
+        
+    }
+    
+    internal func configureUI() {
+        
+    }
+    
+    internal func configureDelegate() {
+        
+    }
+}
