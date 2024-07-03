@@ -94,6 +94,9 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let data = results?[indexPath.row] else { return }
+        
+        NavigationManager.shared.pushVC(DetailTodoViewController(baseView: DetailTodoView(todo: data)))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
