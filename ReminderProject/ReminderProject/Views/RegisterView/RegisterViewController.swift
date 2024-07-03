@@ -75,8 +75,8 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         let content = baseView.memoView.textView.text
         
         RealmManager.shared.create(Todos(
-            category: "식품",
             title: title,
+            category: "식품",
             content: content
         ))
         NavigationManager.shared.dismiss(animated: true)

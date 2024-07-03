@@ -37,6 +37,7 @@
 		CED1E0C62C348920004BFBE1 /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C52C348920004BFBE1 /* Todos.swift */; };
 		CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */; };
 		CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */; };
+		CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CE2C359FFC004BFBE1 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		CED1E0C52C348920004BFBE1 /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
 		CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		CED1E0CE2C359FFC004BFBE1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				CED1E0C52C348920004BFBE1 /* Todos.swift */,
+				CED1E0CE2C359FFC004BFBE1 /* Category.swift */,
 			);
 			path = RealmModels;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				CED1E0AE2C34156B004BFBE1 /* RegisterView.swift in Sources */,
 				CED1E0902C33EFE5004BFBE1 /* BaseViewController.swift in Sources */,
 				CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */,
+				CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */,
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
 				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
 				CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */,
