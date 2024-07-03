@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ListViewController: BaseViewController {
+final class ListViewController: BaseViewController<ListView> {
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),
         style: .plain,
@@ -21,6 +21,16 @@ final class ListViewController: BaseViewController {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.delegate = self
+        
+        baseView.tableView.delegate = self
+        baseView.tableView.dataSource = self
+        baseView.tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
     }
     
     @objc

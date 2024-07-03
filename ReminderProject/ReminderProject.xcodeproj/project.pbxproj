@@ -36,6 +36,7 @@
 		CED1E0C22C34870D004BFBE1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C12C34870D004BFBE1 /* RealmManager.swift */; };
 		CED1E0C62C348920004BFBE1 /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C52C348920004BFBE1 /* Todos.swift */; };
 		CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */; };
+		CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		CED1E0C12C34870D004BFBE1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		CED1E0C52C348920004BFBE1 /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
 		CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */,
 				CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */,
+				CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				CED1E0C22C34870D004BFBE1 /* RealmManager.swift in Sources */,
 				CED1E0B02C341CDC004BFBE1 /* RegisterDisclosureCell.swift in Sources */,
 				CED1E0A92C340DEE004BFBE1 /* TodoCategory.swift in Sources */,
+				CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */,
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
 				CED1E0B92C345386004BFBE1 /* ListViewController.swift in Sources */,

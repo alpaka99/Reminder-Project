@@ -9,9 +9,9 @@ import UIKit
 
 import SnapKit
 
-final class RegisterView: BaseView {
-    private let memoView = RegisterOpenedCell()
-    private lazy var stackView = UIStackView()
+final class RegisterView: BaseView{
+    let memoView = RegisterOpenedCell()
+    lazy var stackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,14 +54,6 @@ final class RegisterView: BaseView {
             registerDisclosureView.configureData(type)
             stackView.addArrangedSubview(registerDisclosureView)
         }
-    }
-    
-    override func configureDelegate(_ vc: BaseViewController? = nil) {
-        super.configureDelegate()
-        
-        self.delegate = vc
-        
-        memoView.configureDelegate(vc)
     }
 }
 

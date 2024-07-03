@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegisterViewController: BaseViewController {
+final class RegisterViewController: BaseViewController<RegisterView> {
     private let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
     
     private lazy var leftBarButton = {
@@ -37,6 +37,12 @@ final class RegisterViewController: BaseViewController {
         navigationItem.title = "새로운 할 일"
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        
     }
     
     @objc
@@ -73,7 +79,6 @@ extension RegisterViewController: UITextFieldDelegate {
          else {
             rightBarButton.isEnabled = true
         }
-        
     }
 }
 
