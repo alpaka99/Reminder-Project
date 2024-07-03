@@ -42,6 +42,8 @@
 		CED1E0D32C35B125004BFBE1 /* DetailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D22C35B125004BFBE1 /* DetailInputViewController.swift */; };
 		CED1E0D62C35B151004BFBE1 /* DetailInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D52C35B151004BFBE1 /* DetailInputView.swift */; };
 		CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D72C35C851004BFBE1 /* DateHelper.swift */; };
+		CED1E0DB2C360BA6004BFBE1 /* DetailTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0DA2C360BA6004BFBE1 /* DetailTodoView.swift */; };
+		CED1E0DD2C360BFE004BFBE1 /* DetailTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0DC2C360BFE004BFBE1 /* DetailTodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,8 @@
 		CED1E0D22C35B125004BFBE1 /* DetailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInputViewController.swift; sourceTree = "<group>"; };
 		CED1E0D52C35B151004BFBE1 /* DetailInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInputView.swift; sourceTree = "<group>"; };
 		CED1E0D72C35C851004BFBE1 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		CED1E0DA2C360BA6004BFBE1 /* DetailTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTodoView.swift; sourceTree = "<group>"; };
+		CED1E0DC2C360BFE004BFBE1 /* DetailTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 		CED1E0952C33FA88004BFBE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E0D92C360B89004BFBE1 /* DetailTodoView */,
 				CED1E0D42C35B13E004BFBE1 /* DetailInputViewController */,
 				CED1E0B72C345368004BFBE1 /* ListView */,
 				CED1E0AA2C34153F004BFBE1 /* RegisterView */,
@@ -248,6 +253,15 @@
 			path = DetailInputViewController;
 			sourceTree = "<group>";
 		};
+		CED1E0D92C360B89004BFBE1 /* DetailTodoView */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E0DA2C360BA6004BFBE1 /* DetailTodoView.swift */,
+				CED1E0DC2C360BFE004BFBE1 /* DetailTodoViewController.swift */,
+			);
+			path = DetailTodoView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,6 +342,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
+				CED1E0DD2C360BFE004BFBE1 /* DetailTodoViewController.swift in Sources */,
+				CED1E0DB2C360BA6004BFBE1 /* DetailTodoView.swift in Sources */,
 				CED1E0BB2C34538B004BFBE1 /* ListView.swift in Sources */,
 				CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */,
 				CED1E0D12C35ADA4004BFBE1 /* RegisterFieldType.swift in Sources */,
