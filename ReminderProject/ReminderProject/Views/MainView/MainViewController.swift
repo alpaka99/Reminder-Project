@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainViewController: BaseViewController {
+final class MainViewController: BaseViewController<MainView> {
     private let categories: [TodoCategory] = TodoCategory.allCases
     private lazy var rightBarbutton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
     
@@ -19,6 +19,14 @@ final class MainViewController: BaseViewController {
     
     @objc func rightBarButtonTapped() {
         print(#function)
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.collectionView.delegate = self
+        baseView.collectionView.dataSource = self
+        baseView.collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
     }
 }
 
@@ -36,3 +44,5 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
 }
+
+

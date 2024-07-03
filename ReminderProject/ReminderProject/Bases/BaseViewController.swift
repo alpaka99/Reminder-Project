@@ -7,14 +7,15 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
-    private var baseView: BaseView? // force unwrapping 바꾸는 방법 생각해보기
+class BaseViewController<T: BaseView>: UIViewController {
+    internal let baseView: T
     
     override func loadView() {
         self.view = baseView
     }
     
-    required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    init(baseView: T) {
+        self.baseView = baseView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,12 +23,6 @@ class BaseViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    convenience init(baseView: BaseView) {
-        self.init(nibName: nil, bundle: nil)
-        self.baseView = baseView
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +46,8 @@ class BaseViewController: UIViewController {
     }
     
     internal func configureDelegate() {
-        baseView?.configureDelegate(self)
+        baseView.delegate = self
     }
 }
 
-extension BaseViewController: BaseViewDelegate {
-    
-}
+extension BaseViewController: BaseViewDelegate { }

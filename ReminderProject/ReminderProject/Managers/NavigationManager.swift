@@ -29,7 +29,8 @@ final class NavigationManager {
         navigationController.dismiss(animated: true)
     }
     
-//    internal func replaceVC(_ vc: BaseViewController) {
+    // MARK: Replace VC -> self.navigationController를 새로 초기화해주고, window를 scenedelegate에서 끌고와서 다시 넣어주는 방식?
+//    internal func replaceVC(_ vc: BaseViewController<BaseView>) {
 //        let navigationController = UINavigationController(rootViewController: vc)
 //        
 //        self.window?.rootViewController = navigationController
