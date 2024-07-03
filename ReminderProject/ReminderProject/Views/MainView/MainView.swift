@@ -115,6 +115,6 @@ final class MainView: BaseView {
     
     @objc
     func addListButtonTapped() {
-        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()))
+//        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()))
     }
 }

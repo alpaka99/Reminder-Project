@@ -50,6 +50,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        
+        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()), animated: true)
+    }
 }
 
 
