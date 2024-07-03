@@ -10,13 +10,38 @@ import UIKit
 import SnapKit
 
 final class RegisterDisclosureCell: BaseView {
-    private let title = UILabel()
-    private let trailingButton = UIButton()
+    let title = {
+        let label = UILabel()
+        
+        label.textColor = .systemGray4
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        
+        return label
+    }()
+    
+    let content = {
+        let label = UILabel()
+        
+        label.textColor = .systemGray4
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        
+        return label
+    }()
+    
+    let trailingButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.tintColor = .systemGray4
+        
+        return button
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(title)
+        self.addSubview(content)
         self.addSubview(trailingButton)
     }
     
@@ -25,6 +50,13 @@ final class RegisterDisclosureCell: BaseView {
         
         title.snp.makeConstraints {
             $0.leading.equalTo(self.snp.leading)
+                .offset(16)
+            $0.verticalEdges.equalTo(self.snp.verticalEdges)
+                .inset(16)
+        }
+        
+        content.snp.makeConstraints {
+            $0.leading.equalTo(title.snp.trailing)
                 .offset(16)
             $0.verticalEdges.equalTo(self.snp.verticalEdges)
                 .inset(16)
@@ -47,15 +79,15 @@ final class RegisterDisclosureCell: BaseView {
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
         
-        title.text = "타이틀"
         title.textColor = .systemGray4
         title.font = .systemFont(ofSize: 16, weight: .semibold)
-        
-        trailingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        trailingButton.tintColor = .systemGray4
     }
     
-    func configureData(_ type: RegisterFieldType) {
-        title.text = type.title
+    func configureData(_ text: String) {
+        title.text = text
     }
+}
+
+protocol DisclosureCellDelegate {
+    func trailingButtonTapped()
 }

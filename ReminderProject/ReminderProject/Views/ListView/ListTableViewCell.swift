@@ -93,7 +93,7 @@ final class ListTableViewCell: BaseTableViewCell {
     func configureData(_ data: Todos) {
         title.text = data.title
         content.text = data.content
-        dateLabel.text = data.createdAt.formatted()
-        tagLabel.text = "#쇼핑"
+        dateLabel.text = DateHelper.shared.string(from: data.dueDate)
+        tagLabel.text = data.tag
     }
 }

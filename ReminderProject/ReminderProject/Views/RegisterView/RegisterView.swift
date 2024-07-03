@@ -11,6 +11,39 @@ import SnapKit
 
 final class RegisterView: BaseView {
     let memoView = RegisterOpenedCell()
+    
+    private(set) var dueDateTextField = {
+        let disclosureCell = RegisterDisclosureCell()
+        
+        disclosureCell.configureData("마감일")
+        
+        return disclosureCell
+    }()
+    
+    private(set) var tagTextField = {
+        let disclosureCell = RegisterDisclosureCell()
+        
+        disclosureCell.configureData("태그")
+        
+        return disclosureCell
+    }()
+    
+    private(set) var priorityTextField = {
+        let disclosureCell = RegisterDisclosureCell()
+        
+        disclosureCell.configureData("우선 순위")
+        
+        return disclosureCell
+    }()
+    
+    private(set) var imageTextField = {
+        let disclosureCell = RegisterDisclosureCell()
+        
+        disclosureCell.configureData("이미지 추가")
+        
+        return disclosureCell
+    }()
+    
     lazy var stackView = UIStackView()
     
     override init(frame: CGRect) {
@@ -48,48 +81,9 @@ final class RegisterView: BaseView {
     func configureArrandedSubViews() {
         stackView.addArrangedSubview(memoView)
         
-        RegisterFieldType.allCases.forEach { type in
-            let registerDisclosureView = RegisterDisclosureCell()
-            
-            registerDisclosureView.configureData(type)
-            stackView.addArrangedSubview(registerDisclosureView)
-        }
+        stackView.addArrangedSubview(dueDateTextField)
+        stackView.addArrangedSubview(tagTextField)
+        stackView.addArrangedSubview(priorityTextField)
+        stackView.addArrangedSubview(imageTextField)
     }
-}
-
-enum RegisterFieldType: CaseIterable {
-    static var allCases: [RegisterFieldType] = [
-//        memo(.opened),
-        dDay(.disclosured),
-        tag(.disclosured),
-        priority(.disclosured),
-        image(.disclosured)
-    ]
-    
-//    case memo(RegisterFieldMode)
-    case dDay(RegisterFieldMode)
-    case tag(RegisterFieldMode)
-    case priority(RegisterFieldMode)
-    case image(RegisterFieldMode)
-    
-    var title: String {
-        switch self {
-//        case .memo(_):
-//            return "제목"
-        case .dDay(_):
-            return "마감일"
-        case .tag(_):
-            return "태그"
-        case .priority(_):
-            return "우선순위"
-        case .image(_):
-            return "이미지 추가"
-        }
-    }
-    
-}
-
-enum RegisterFieldMode {
-    case opened
-    case disclosured
 }

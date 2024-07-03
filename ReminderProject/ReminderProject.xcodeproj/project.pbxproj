@@ -38,6 +38,10 @@
 		CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */; };
 		CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */; };
 		CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CE2C359FFC004BFBE1 /* Category.swift */; };
+		CED1E0D12C35ADA4004BFBE1 /* RegisterFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D02C35ADA4004BFBE1 /* RegisterFieldType.swift */; };
+		CED1E0D32C35B125004BFBE1 /* DetailInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D22C35B125004BFBE1 /* DetailInputViewController.swift */; };
+		CED1E0D62C35B151004BFBE1 /* DetailInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D52C35B151004BFBE1 /* DetailInputView.swift */; };
+		CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D72C35C851004BFBE1 /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,10 @@
 		CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0CE2C359FFC004BFBE1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		CED1E0D02C35ADA4004BFBE1 /* RegisterFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFieldType.swift; sourceTree = "<group>"; };
+		CED1E0D22C35B125004BFBE1 /* DetailInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInputViewController.swift; sourceTree = "<group>"; };
+		CED1E0D52C35B151004BFBE1 /* DetailInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInputView.swift; sourceTree = "<group>"; };
+		CED1E0D72C35C851004BFBE1 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,7 @@
 		CED1E0952C33FA88004BFBE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E0D42C35B13E004BFBE1 /* DetailInputViewController */,
 				CED1E0B72C345368004BFBE1 /* ListView */,
 				CED1E0AA2C34153F004BFBE1 /* RegisterView */,
 				CED1E0962C33FA91004BFBE1 /* MainView */,
@@ -159,6 +168,8 @@
 			children = (
 				CED1E09C2C33FEF9004BFBE1 /* Constants.swift */,
 				CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */,
+				CED1E0D02C35ADA4004BFBE1 /* RegisterFieldType.swift */,
+				CED1E0D72C35C851004BFBE1 /* DateHelper.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -226,6 +237,15 @@
 				CED1E0CE2C359FFC004BFBE1 /* Category.swift */,
 			);
 			path = RealmModels;
+			sourceTree = "<group>";
+		};
+		CED1E0D42C35B13E004BFBE1 /* DetailInputViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E0D22C35B125004BFBE1 /* DetailInputViewController.swift */,
+				CED1E0D52C35B151004BFBE1 /* DetailInputView.swift */,
+			);
+			path = DetailInputViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +330,7 @@
 				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
 				CED1E0BB2C34538B004BFBE1 /* ListView.swift in Sources */,
 				CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */,
+				CED1E0D12C35ADA4004BFBE1 /* RegisterFieldType.swift in Sources */,
 				CED1E0982C33FA98004BFBE1 /* MainViewController.swift in Sources */,
 				CED1E09A2C33FAA9004BFBE1 /* MainView.swift in Sources */,
 				CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */,
@@ -321,6 +342,7 @@
 				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
 				CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */,
 				CED1E0C62C348920004BFBE1 /* Todos.swift in Sources */,
+				CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */,
 				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
 				CED1E09F2C34059D004BFBE1 /* MainCollectionViewCell.swift in Sources */,
 				CED1E0C22C34870D004BFBE1 /* RealmManager.swift in Sources */,
@@ -330,7 +352,9 @@
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
 				CED1E0B92C345386004BFBE1 /* ListViewController.swift in Sources */,
+				CED1E0D32C35B125004BFBE1 /* DetailInputViewController.swift in Sources */,
 				CED1E0AC2C341555004BFBE1 /* RegisterViewController.swift in Sources */,
+				CED1E0D62C35B151004BFBE1 /* DetailInputView.swift in Sources */,
 				CED1E0752C33E79C004BFBE1 /* SceneDelegate.swift in Sources */,
 				CED1E0A72C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift in Sources */,
 			);

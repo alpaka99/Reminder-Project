@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Realm Schema Migration
-        let config = Realm.Configuration(schemaVersion: 1) { migration,oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 2) { migration,oldSchemaVersion in
             if oldSchemaVersion < 1 {
                 // TodoTable에 dueDate column 추가
             }

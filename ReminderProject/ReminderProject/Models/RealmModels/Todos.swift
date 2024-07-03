@@ -11,25 +11,34 @@ import RealmSwift
 
 final class Todos: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted(indexed: true) var category: String
-    @Persisted var title: String
-    @Persisted var content: String?
-    @Persisted var dueDate: Date?
     @Persisted var createdAt: Date
     
+    @Persisted var title: String
+    @Persisted var content: String?
+    @Persisted(indexed: true) var category: String
+    @Persisted var dueDate: Date?
+    @Persisted var priority: Int?
+    @Persisted var tag: String?
+    
+    
     convenience init(
+        createdAt: Date = Date.now,
         title: String,
-        category: String,
         content: String? = nil,
+        category: String,
         dueDate: Date? = nil,
-        createdAt: Date = Date.now
+        tag: String? = nil,
+        priority: Int? = nil
     ) {
         self.init()
         
-        self.title = title
-        self.category = category
-        self.content = content
-        self.dueDate = dueDate
         self.createdAt = createdAt
+        
+        self.title = title
+        self.content = content
+        self.category = category
+        self.dueDate = dueDate
+        self.tag = tag
+        self.priority = priority
     }
 }
