@@ -10,8 +10,21 @@ import UIKit
 import SnapKit
 
 final class ListView: BaseView {
-    let titleLabel = UILabel()
-    let tableView = UITableView()
+    let titleLabel = {
+        let label = UILabel()
+        label.text = "전체"
+        label.textColor = .systemBlue
+        label.font = .systemFont(ofSize: 40, weight: .bold)
+        return label
+    }()
+    
+    let tableView = {
+        let tableView = UITableView()
+        
+        tableView.backgroundColor = .clear
+        
+        return tableView
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
@@ -33,16 +46,5 @@ final class ListView: BaseView {
                 .offset(16)
             $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
-    }
-    
-    
-    override func configureUI() {
-        super.configureUI()
-        
-        titleLabel.text = "전체"
-        titleLabel.textColor = .systemBlue
-        titleLabel.font = .systemFont(ofSize: 40, weight: .bold)
-        
-        tableView.backgroundColor = .clear
     }
 }

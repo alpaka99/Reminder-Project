@@ -9,6 +9,7 @@ import UIKit
 
 final class ListTableViewCell: BaseTableViewCell {
     private let toggleButton = UIButton()
+    private let priority = UILabel()
     private let title = UILabel()
     private let content = UILabel()
     private let dateLabel = UILabel()
@@ -18,6 +19,7 @@ final class ListTableViewCell: BaseTableViewCell {
         super.configureHierarchy()
         
         contentView.addSubview(toggleButton)
+        contentView.addSubview(priority)
         contentView.addSubview(title)
         contentView.addSubview(content)
         contentView.addSubview(dateLabel)
@@ -37,11 +39,17 @@ final class ListTableViewCell: BaseTableViewCell {
                 .multipliedBy(1)
         }
         
-        title.snp.makeConstraints {
+        priority.snp.makeConstraints {
             $0.leading.equalTo(toggleButton.snp.trailing)
                 .offset(8)
-            $0.trailing.equalTo(contentView)
+            $0.centerY.equalTo(toggleButton.snp.centerY)
+        }
+        
+        title.snp.makeConstraints {
+            $0.leading.equalTo(priority.snp.trailing)
                 .offset(8)
+            $0.trailing.lessThanOrEqualTo(contentView)
+                .offset(-8)
             $0.centerY.equalTo(toggleButton.snp.centerY)
         }
         
@@ -73,6 +81,8 @@ final class ListTableViewCell: BaseTableViewCell {
         
         toggleButton.setImage(UIImage(systemName: "circle"), for: .normal)
         
+        priority.font = .systemFont(ofSize: 16, weight: .semibold)
+        priority.textColor = .white
         
         title.font = .systemFont(ofSize: 16, weight: .semibold)
         title.textColor = .white
@@ -93,7 +103,8 @@ final class ListTableViewCell: BaseTableViewCell {
     func configureData(_ data: Todos) {
         title.text = data.title
         content.text = data.content
-        dateLabel.text = data.createdAt.formatted()
-        tagLabel.text = "#쇼핑"
+        dateLabel.text = DateHelper.shared.string(from: data.dueDate)
+        priority.text = String(data.priority ?? -1)
+        tagLabel.text = data.tag
     }
 }

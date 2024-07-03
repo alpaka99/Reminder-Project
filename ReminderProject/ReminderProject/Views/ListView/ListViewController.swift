@@ -41,11 +41,11 @@ final class ListViewController: BaseViewController<ListView> {
             preferredStyle: .actionSheet
         )
         let dueDateSort = UIAlertAction(
-            title: "날짜 순",
+            title: "카테고리 순",
             style: .default
         ) {[weak self] _ in
             self?.results = self?.results?.sorted(
-                byKeyPath: "createdAt",
+                byKeyPath: "category",
                 ascending: true
             )
             self?.baseView.tableView.reloadData()
@@ -61,11 +61,11 @@ final class ListViewController: BaseViewController<ListView> {
             self?.baseView.tableView.reloadData()
         }
         let memoSort = UIAlertAction(
-            title: "메모 순",
+            title: "마감일 순",
             style: .default
         ) { [weak self] _ in
             self?.results = self?.results?.sorted(
-                byKeyPath: "content",
+                byKeyPath: "dueDate",
                 ascending: true
             )
             self?.baseView.tableView.reloadData()

@@ -49,6 +49,30 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         )
         
         baseView.memoView.textView.delegate = self
+        
+        baseView.dueDateTextField.trailingButton.addTarget(
+            self,
+            action: #selector(dueDateTextFieldTrailingButtonTapped),
+            for: .touchUpInside
+        )
+        
+        baseView.tagTextField.trailingButton.addTarget(
+            self,
+            action: #selector(tagTextFieldTrailingButtonTapped),
+            for: .touchUpInside
+        )
+        
+        baseView.priorityTextField.trailingButton.addTarget(
+            self,
+            action: #selector(priorityTextFieldTrailingButtonTapped),
+            for: .touchUpInside
+        )
+        
+        baseView.imageTextField.trailingButton.addTarget(
+            self,
+            action: #selector(imageTextFieldTrailingButtonTapped),
+            for: .touchUpInside
+        )
     }
     
     @objc
@@ -58,6 +82,50 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         } else {
             rightBarButton.isEnabled = false
         }
+    }
+    
+    @objc
+    func dueDateTextFieldTrailingButtonTapped(_ sender: UIButton) {
+        print(#function)
+        let vc = DetailInputViewController(baseView: DetailInputView())
+        
+        vc.configureData(.dueDate)
+        vc.delegate = self
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        // MARK: present된 vc에서는 navigationManager를 이용한 push가 안됨
+//        NavigationManager.shared.pushVC(vc, animated: true)
+    }
+    
+    @objc
+    func tagTextFieldTrailingButtonTapped(_ sender: UIButton) {
+        let vc = DetailInputViewController(baseView: DetailInputView())
+        
+        vc.configureData(.tag)
+        vc.delegate = self
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    func priorityTextFieldTrailingButtonTapped(_ sender: UIButton) {
+        let vc = DetailInputViewController(baseView: DetailInputView())
+        
+        vc.configureData(.priority)
+        vc.delegate = self
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    func imageTextFieldTrailingButtonTapped(_ sender: UIButton) {
+        let vc = DetailInputViewController(baseView: DetailInputView())
+        
+        vc.configureData(.image)
+        vc.delegate = self
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
@@ -73,12 +141,20 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         }
         
         let content = baseView.memoView.textView.text
+        let dueDate = baseView.dueDateTextField.content.text ?? ""
+        let tag = baseView.tagTextField.content.text
+        let priority = Int(baseView.priorityTextField.content.text ?? "0")
+        
         
         RealmManager.shared.create(Todos(
-            category: "식품",
             title: title,
-            content: content
+            content: content, 
+            category: "식품",
+            dueDate: DateHelper.shared.date(from: dueDate),
+            tag: tag,
+            priority: priority
         ))
+        
         NavigationManager.shared.dismiss(animated: true)
     }
 }
@@ -86,5 +162,20 @@ final class RegisterViewController: BaseViewController<RegisterView> {
 extension RegisterViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
+    }
+}
+
+extension RegisterViewController: DetailInputDelegate {
+    func sendDetailData(_ type: RegisterFieldType, text: String) {
+        switch type {
+        case .dueDate:
+            baseView.dueDateTextField.content.text = text
+        case .tag:
+            baseView.tagTextField.content.text = text
+        case .priority:
+            baseView.priorityTextField.content.text = text
+        case .image:
+            baseView.imageTextField.content.text = text
+        }
     }
 }

@@ -9,24 +9,36 @@ import Foundation
 
 import RealmSwift
 
-class Todos: Object {
+final class Todos: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted(indexed: true) var category: String
-    @Persisted var title: String
-    @Persisted var content: String?
     @Persisted var createdAt: Date
     
+    @Persisted var title: String
+    @Persisted var content: String?
+    @Persisted(indexed: true) var category: String
+    @Persisted var dueDate: Date?
+    @Persisted var priority: Int?
+    @Persisted var tag: String?
+    
+    
     convenience init(
-        category: String,
+        createdAt: Date = Date.now,
         title: String,
         content: String? = nil,
-        createdAt: Date = Date.now
+        category: String,
+        dueDate: Date? = nil,
+        tag: String? = nil,
+        priority: Int? = nil
     ) {
         self.init()
         
-        self.category = category
+        self.createdAt = createdAt
+        
         self.title = title
         self.content = content
-        self.createdAt = createdAt
+        self.category = category
+        self.dueDate = dueDate
+        self.tag = tag
+        self.priority = priority
     }
 }
