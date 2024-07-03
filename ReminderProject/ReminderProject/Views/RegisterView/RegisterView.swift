@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class RegisterView: BaseView{
+final class RegisterView: BaseView {
     let memoView = RegisterOpenedCell()
     lazy var stackView = UIStackView()
     

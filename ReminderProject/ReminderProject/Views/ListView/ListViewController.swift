@@ -35,15 +35,40 @@ final class ListViewController: BaseViewController<ListView> {
     
     @objc
     func rightBarButtonTapped() {
-        let ac = UIAlertController(title: "정렬", message: nil, preferredStyle: .actionSheet)
-        let dueDateSort = UIAlertAction(title: "날짜 순", style: .default) {[weak self] _ in
-            self?.results = self?.results?.sorted(byKeyPath: "createdAt", ascending: true)
+        let ac = UIAlertController(
+            title: "정렬",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let dueDateSort = UIAlertAction(
+            title: "날짜 순",
+            style: .default
+        ) {[weak self] _ in
+            self?.results = self?.results?.sorted(
+                byKeyPath: "createdAt",
+                ascending: true
+            )
+            self?.baseView.tableView.reloadData()
         }
-        let titleSort = UIAlertAction(title: "이름 순", style: .default) { [weak self] _ in
-            self?.results = self?.results?.sorted(byKeyPath: "title", ascending: true)
+        let titleSort = UIAlertAction(
+            title: "이름 순",
+            style: .default
+        ) { [weak self] _ in
+            self?.results = self?.results?.sorted(
+                byKeyPath: "title",
+                ascending: true
+            )
+            self?.baseView.tableView.reloadData()
         }
-        let memoSort = UIAlertAction(title: "메모 순", style: .default) { [weak self] _ in
-            self?.results = self?.results?.sorted(byKeyPath: "content", ascending: true)
+        let memoSort = UIAlertAction(
+            title: "메모 순",
+            style: .default
+        ) { [weak self] _ in
+            self?.results = self?.results?.sorted(
+                byKeyPath: "content",
+                ascending: true
+            )
+            self?.baseView.tableView.reloadData()
         }
         
         ac.addAction(dueDateSort)
