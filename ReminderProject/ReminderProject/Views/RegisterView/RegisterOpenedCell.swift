@@ -67,10 +67,4 @@ final class RegisterOpenedCell: BaseView {
         textView.font = .systemFont(ofSize: 18)
         textView.textContainer.maximumNumberOfLines = 8
     }
-    
-    override func configureDelegate(_ vc: BaseViewController? = nil) {
-        super.configureDelegate()
-        
-        textView.delegate = vc as? any UITextViewDelegate
-    }
 }

@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MainView: BaseView {
-    private let titleLabel = {
+    private(set) var titleLabel = {
         let label = UILabel()
         label.text = "전체"
         label.font = .systemFont(ofSize: 32, weight: .semibold)
@@ -18,7 +18,7 @@ final class MainView: BaseView {
         return label
     }()
     
-    private let collectionView = {
+    private(set) var collectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionView.flowLayout(
@@ -31,7 +31,7 @@ final class MainView: BaseView {
         return collectionView
     }()
     
-    private let newTodoButton = {
+    private(set) var newTodoButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "plus.circle.fill")
@@ -43,7 +43,7 @@ final class MainView: BaseView {
         return button
     }()
     
-    private let addListButton = {
+    private(set) var addListButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
         config.title = "목록 추가"
@@ -104,16 +104,6 @@ final class MainView: BaseView {
             action: #selector(addListButtonTapped),
             for: .touchUpInside
         )
-    }
-    
-    override func configureDelegate(_ vc: BaseViewController?) {
-        super.configureDelegate()
-        
-        collectionView.delegate = vc as? any UICollectionViewDelegate
-        collectionView.dataSource = vc as? any UICollectionViewDataSource
-        
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.identifier)
-        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
     }
     
     @objc

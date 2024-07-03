@@ -45,15 +45,4 @@ final class ListView: BaseView {
         
         tableView.backgroundColor = .clear
     }
-    
-    override func configureDelegate(_ vc: BaseViewController? = nil) {
-        super.configureDelegate()
-        
-        
-        tableView.delegate = vc as? any UITableViewDelegate
-        tableView.dataSource = vc as? any UITableViewDataSource
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
-        tableView.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.identifier)
-    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RegisterViewController: BaseViewController {
+final class RegisterViewController: BaseViewController<RegisterView> {
     private let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
     
     private lazy var leftBarButton = {
@@ -39,6 +39,12 @@ final class RegisterViewController: BaseViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        
+    }
+    
     @objc
     func cancelButtonTapped() {
         NavigationManager.shared.dismiss(animated: true)
@@ -46,7 +52,7 @@ final class RegisterViewController: BaseViewController {
     
     @objc
     func addButtonTapped() {
-        print(#function)
+//        print(#function)
     }
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseView: UIView {
+    
     weak var delegate: BaseViewDelegate?
     
     override init(frame: CGRect) {
@@ -36,12 +37,10 @@ class BaseView: UIView {
         self.backgroundColor = .black
     }
     
-    internal func configureDelegate(_ vc: BaseViewController? = nil) {
-        self.delegate = vc
+    internal func configureDelegate() {
+        
     }
 }
 
 
-protocol BaseViewDelegate: BaseViewController {
-    func configureDelegate()
-}
+protocol BaseViewDelegate: AnyObject { }
