@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class RegisterView: BaseView{
+final class RegisterView: BaseView {
     let memoView = RegisterOpenedCell()
     lazy var stackView = UIStackView()
     
@@ -54,11 +54,6 @@ final class RegisterView: BaseView{
             registerDisclosureView.configureData(type)
             stackView.addArrangedSubview(registerDisclosureView)
         }
-    }
-    
-    
-    deinit {
-        print(#function, objectName)
     }
 }
 

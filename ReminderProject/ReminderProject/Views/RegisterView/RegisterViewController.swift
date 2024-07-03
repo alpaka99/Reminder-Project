@@ -42,7 +42,22 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     override func configureDelegate() {
         super.configureDelegate()
         
+        baseView.memoView.textField.addTarget(
+            self,
+            action: #selector(textFieldTextChanged),
+            for: .editingChanged
+        )
         
+        baseView.memoView.textView.delegate = self
+    }
+    
+    @objc
+    func textFieldTextChanged(_ sender: UITextField) {
+        if let text = sender.text, !text.isEmpty {
+            rightBarButton.isEnabled = true
+        } else {
+            rightBarButton.isEnabled = false
+        }
     }
     
     @objc
@@ -50,9 +65,21 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         NavigationManager.shared.dismiss(animated: true)
     }
     
+    // MARK: Fetch TextField from baseView
     @objc
     func addButtonTapped() {
-//        print(#function)
+        guard let  title = baseView.memoView.textField.text else {
+            return
+        }
+        
+        let content = baseView.memoView.textView.text
+        
+        RealmManager.shared.create(Todos(
+            category: "식품",
+            title: title,
+            content: content
+        ))
+        NavigationManager.shared.dismiss(animated: true)
     }
 }
 

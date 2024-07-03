@@ -10,9 +10,38 @@ import UIKit
 import SnapKit
 
 final class RegisterOpenedCell: BaseView {
-    private let textField = UITextField()
-    private let divider = UIView()
-    private let textView = UITextView()
+    let textField = {
+        let textField = UITextField()
+        
+        var attributedContainer = AttributeContainer()
+        attributedContainer.foregroundColor = .systemGray5
+        attributedContainer.font = .systemFont(ofSize: 20, weight: .semibold)
+        let attributedString = AttributedString("제목", attributes: attributedContainer)
+        textField.attributedPlaceholder = NSAttributedString(attributedString)
+        textField.textColor = .white
+        
+        return textField
+    }()
+    
+    private let divider = {
+        let view = UIView()
+        
+        view.backgroundColor = .systemGray5
+        
+        return view
+    }()
+    
+    let textView = {
+        let textView = UITextView()
+        
+        textView.backgroundColor = .darkGray
+        textView.text = "메모"
+        textView.textColor = .systemGray4
+        textView.font = .systemFont(ofSize: 18)
+        textView.textContainer.maximumNumberOfLines = 8
+        
+        return textView
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
@@ -51,20 +80,5 @@ final class RegisterOpenedCell: BaseView {
         
         self.backgroundColor = .darkGray
         self.layer.cornerRadius = 8
-        
-        var attributedContainer = AttributeContainer()
-        attributedContainer.foregroundColor = .systemGray5
-        attributedContainer.font = .systemFont(ofSize: 20, weight: .semibold)
-        let attributedString = AttributedString("제목", attributes: attributedContainer)
-        textField.attributedPlaceholder = NSAttributedString(attributedString)
-        textField.textColor = .white
-        
-        divider.backgroundColor = .systemGray5
-        
-        textView.backgroundColor = .darkGray
-        textView.text = "메모"
-        textView.textColor = .systemGray4
-        textView.font = .systemFont(ofSize: 18)
-        textView.textContainer.maximumNumberOfLines = 8
     }
 }
