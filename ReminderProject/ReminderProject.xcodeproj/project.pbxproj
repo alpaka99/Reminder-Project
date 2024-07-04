@@ -44,6 +44,8 @@
 		CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0D72C35C851004BFBE1 /* DateHelper.swift */; };
 		CED1E0DB2C360BA6004BFBE1 /* DetailTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0DA2C360BA6004BFBE1 /* DetailTodoView.swift */; };
 		CED1E0DD2C360BFE004BFBE1 /* DetailTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0DC2C360BFE004BFBE1 /* DetailTodoViewController.swift */; };
+		CED1E1222C36D6CA004BFBE1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1212C36D6CA004BFBE1 /* UIColor+Extension.swift */; };
+		CED1E1242C36D6FC004BFBE1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		CED1E0D72C35C851004BFBE1 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		CED1E0DA2C360BA6004BFBE1 /* DetailTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTodoView.swift; sourceTree = "<group>"; };
 		CED1E0DC2C360BFE004BFBE1 /* DetailTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTodoViewController.swift; sourceTree = "<group>"; };
+		CED1E1212C36D6CA004BFBE1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,8 @@
 				CED1E0A62C3409D5004BFBE1 /* UICollectionViewCell+Extension.swift */,
 				CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */,
 				CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */,
+				CED1E1212C36D6CA004BFBE1 /* UIColor+Extension.swift */,
+				CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,10 +350,12 @@
 				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
 				CED1E0DD2C360BFE004BFBE1 /* DetailTodoViewController.swift in Sources */,
 				CED1E0DB2C360BA6004BFBE1 /* DetailTodoView.swift in Sources */,
+				CED1E1222C36D6CA004BFBE1 /* UIColor+Extension.swift in Sources */,
 				CED1E0BB2C34538B004BFBE1 /* ListView.swift in Sources */,
 				CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */,
 				CED1E0D12C35ADA4004BFBE1 /* RegisterFieldType.swift in Sources */,
 				CED1E0982C33FA98004BFBE1 /* MainViewController.swift in Sources */,
+				CED1E1242C36D6FC004BFBE1 /* String+Extension.swift in Sources */,
 				CED1E09A2C33FAA9004BFBE1 /* MainView.swift in Sources */,
 				CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */,
 				CED1E0AE2C34156B004BFBE1 /* RegisterView.swift in Sources */,

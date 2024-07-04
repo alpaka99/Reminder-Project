@@ -9,26 +9,16 @@ import RealmSwift
 
 final class RealmManager {
     static let shared = RealmManager()
-    private var realm: Realm?
+    private var realm = try! Realm()
     
     private init() { 
-        
-        initializeRealm()
-    }
-    
-    private func initializeRealm() {
-        do {
-            self.realm = try Realm()
-        } catch {
-            print("Realm Initialize Error")
-            print(error)
-        }
+        print(realm.configuration.fileURL)
     }
     
     internal func create<T: Object>(_ data: T) {
         do {
-            try realm?.write {
-                realm?.add(data)
+            try realm.write {
+                realm.add(data)
             }
         } catch {
             print("Realm Create error")
@@ -36,22 +26,22 @@ final class RealmManager {
         }
     }
     
-    internal func readAll<T: Object>(_ type: T.Type) -> Results<T>? {
-        let results = realm?.objects(type)
+    internal func readAll<T: Object>(_ type: T.Type) -> Results<T> {
+        let results = realm.objects(type)
         return results
     }
     
     internal func readOne<T: Object>(_ data: T) -> T? {
-        let result = realm?.object(ofType: T.self, forPrimaryKey: data.objectSchema.primaryKeyProperty)
+        let result = realm.object(ofType: T.self, forPrimaryKey: data.objectSchema.primaryKeyProperty)
         return result
     }
     
     // MARK: Update
     internal func update<T: Object> (with newValue: T) {
         do {
-            let target = realm?.object(ofType: T.self, forPrimaryKey: newValue.objectSchema.primaryKeyProperty)
-            try realm?.write {
-                realm?.add(newValue, update: .modified)
+            let target = realm.object(ofType: T.self, forPrimaryKey: newValue.objectSchema.primaryKeyProperty)
+            try realm.write {
+                realm.add(newValue, update: .modified)
             }
         } catch {
             print("Realm Update Error")
@@ -61,8 +51,8 @@ final class RealmManager {
     
     internal func delete<T: Object>(_ data: T) {
         do {
-            try realm?.write {
-                realm?.delete(data)
+            try realm.write {
+                realm.delete(data)
             }
         } catch {
             print("Realm Delete Error")

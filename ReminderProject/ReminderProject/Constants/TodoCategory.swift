@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum TodoCategory: CaseIterable {
+enum TodoCategory: String, CaseIterable {
     case today
     case scheduled
     case total

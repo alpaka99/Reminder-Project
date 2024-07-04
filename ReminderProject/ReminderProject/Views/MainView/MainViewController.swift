@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainViewController: BaseViewController<MainView> {
-    private let categories: [TodoCategory] = TodoCategory.allCases
+    private let categories = RealmManager.shared.readAll(Category.self)
     
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),

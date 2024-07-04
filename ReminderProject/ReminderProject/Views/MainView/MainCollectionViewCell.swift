@@ -73,14 +73,14 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         number.textColor = .white
     }
     
-    internal func configureData(_ type: TodoCategory) {
-        iconBackground.backgroundColor = type.backgroundColor
-        icon.image = UIImage(systemName: type.systemName)
+    internal func configureData(_ category: Category) {
+        iconBackground.backgroundColor = UIColor.hexToColor(category.backgroundColor)
+        icon.image = UIImage(systemName: category.iconName)
         icon.tintColor = .white
         icon.contentMode = .scaleAspectFit
         
         
-        title.text = type.title
+        title.text = category.categoryName
         
         number.text = "10"
     }
