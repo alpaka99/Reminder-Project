@@ -47,7 +47,7 @@ final class ListView: BaseView {
         }
     }
     
-    func configureData(_ data: Category) {
-        titleLabel.text = data.categoryName
+    func configureData(_ data: TodoCategory) {
+        titleLabel.text = data.title
     }
 }

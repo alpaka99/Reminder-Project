@@ -34,7 +34,7 @@
 		CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0BC2C34596B004BFBE1 /* ListTableViewCell.swift */; };
 		CED1E0C02C346ABC004BFBE1 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0BF2C346ABC004BFBE1 /* NavigationManager.swift */; };
 		CED1E0C22C34870D004BFBE1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C12C34870D004BFBE1 /* RealmManager.swift */; };
-		CED1E0C62C348920004BFBE1 /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C52C348920004BFBE1 /* Todos.swift */; };
+		CED1E0C62C348920004BFBE1 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C52C348920004BFBE1 /* Todo.swift */; };
 		CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */; };
 		CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */; };
 		CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E0CE2C359FFC004BFBE1 /* Category.swift */; };
@@ -76,7 +76,7 @@
 		CED1E0BC2C34596B004BFBE1 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		CED1E0BF2C346ABC004BFBE1 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		CED1E0C12C34870D004BFBE1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		CED1E0C52C348920004BFBE1 /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
+		CED1E0C52C348920004BFBE1 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		CED1E0C72C3497E2004BFBE1 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0CC2C356203004BFBE1 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		CED1E0CE2C359FFC004BFBE1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 		CED1E0C42C348919004BFBE1 /* RealmModels */ = {
 			isa = PBXGroup;
 			children = (
-				CED1E0C52C348920004BFBE1 /* Todos.swift */,
+				CED1E0C52C348920004BFBE1 /* Todo.swift */,
 				CED1E0CE2C359FFC004BFBE1 /* Category.swift */,
 			);
 			path = RealmModels;
@@ -365,7 +365,7 @@
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
 				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
 				CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */,
-				CED1E0C62C348920004BFBE1 /* Todos.swift in Sources */,
+				CED1E0C62C348920004BFBE1 /* Todo.swift in Sources */,
 				CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */,
 				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
 				CED1E09F2C34059D004BFBE1 /* MainCollectionViewCell.swift in Sources */,

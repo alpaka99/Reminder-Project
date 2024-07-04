@@ -17,15 +17,15 @@ final class ListViewController: BaseViewController<ListView> {
         action: #selector(rightBarButtonTapped)
     )
     
-    private var category: Category
+    private var category: TodoCategory
     private lazy var results = RealmManager.shared.readAll(Todos.self)
         .where {
-            $0.tag == category.categoryName
+            $0.tag == category.title
         }
     
     weak var delegate: ListViewControllerDelegate?
     
-    init(baseView: ListView, category: Category) {
+    init(baseView: ListView, category: TodoCategory) {
         self.category = category
         super.init(baseView: baseView)
     }

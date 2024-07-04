@@ -10,8 +10,28 @@ import UIKit
 import RealmSwift
 
 final class MainViewController: BaseViewController<MainView> {
-    private var categories = RealmManager.shared.readAll(Category.self)
+    private var categories = TodoCategory.allCases
+    private var totalTodos = RealmManager.shared.readAll(Todo.self)
+    private lazy var todayTodos: Results<Todo> = totalTodos.where {
+        // MARK: 오늘날짜와 비교하는 로직 필요
+        $0.dueDate == Date.now
+    }
+    private lazy var scheduledTodos: Results<Todo> = totalTodos.where {
+        $0.dueDate > Date.now
+    }
+    private lazy var flagedTodos: Results<Todo> = totalTodos.where {
+        $0.flaged == true
+    }
+    private lazy var completedTodos: Results<Todo> = totalTodos.where {
+        $0.completed == true
+    }
     
+    private lazy var leftBarButton = UIBarButtonItem(
+        image: UIImage(systemName: "calendar.badge.clock"),
+        style: .plain,
+        target: self,
+        action: #selector(leftBarButtonTapped)
+    )
     
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),
@@ -20,17 +40,15 @@ final class MainViewController: BaseViewController<MainView> {
         action: #selector(rightBarButtonTapped)
     )
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        categories = RealmManager.shared.readAll(Category.self)
-    }
-    
     override func configureUI() {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    @objc
+    func leftBarButtonTapped() {
+        
     }
     
     @objc func rightBarButtonTapped() {
@@ -72,7 +90,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
         
         let type = categories[indexPath.row]
-        cell.configureData(type)
+        cell.configureData(type, count: 10)
         
         return cell
     }
@@ -96,14 +114,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: RegisterViewControllerDelegate {
     func saveButtonTapped() {
-        categories = RealmManager.shared.readAll(Category.self)
         baseView.collectionView.reloadData()
     }
 }
 
 extension MainViewController: ListViewControllerDelegate {
     func deleteButtonTapped() {
-        categories = RealmManager.shared.readAll(Category.self)
         baseView.collectionView.reloadData()
     }
 }

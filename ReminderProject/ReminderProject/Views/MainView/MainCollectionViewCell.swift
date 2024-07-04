@@ -74,20 +74,14 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         number.textColor = .white
     }
     
-    internal func configureData(_ category: Category) {
-        iconBackground.backgroundColor = UIColor.hexToColor(category.backgroundColor)
-        icon.image = UIImage(systemName: category.iconName)
+    internal func configureData(_ category: TodoCategory, count: Int) {
+        iconBackground.backgroundColor = category.backgroundColor
+        icon.image = UIImage(systemName: category.systemName)
         icon.tintColor = .white
         icon.contentMode = .scaleAspectFit
         
         
-        title.text = category.categoryName
-        
-        let count = RealmManager.shared.readAll(Todos.self)
-            .where {
-                $0.tag == category.categoryName
-            }
-            .count
+        title.text = category.title
         
         number.text = String(count)
     }
