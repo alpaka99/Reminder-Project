@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RealmSwift
+
 final class ListViewController: BaseViewController<ListView> {
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),
@@ -15,12 +17,24 @@ final class ListViewController: BaseViewController<ListView> {
         action: #selector(rightBarButtonTapped)
     )
     
-    private var results = RealmManager.shared.readAll(Todos.self)
+    private var category: Category
+    private lazy var results = RealmManager.shared.readAll(Todos.self)
+        .where {
+            $0.tag == category.categoryName
+        }
+    
+    weak var delegate: ListViewControllerDelegate?
+    
+    init(baseView: ListView, category: Category) {
+        self.category = category
+        super.init(baseView: baseView)
+    }
     
     override func configureUI() {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
+        baseView.configureData(category)
     }
     
     override func configureDelegate() {
@@ -114,9 +128,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(
             style: .destructive,
             title: "삭제"
-        ) { _, _, _ in
+        ) { [weak self] _, _, _ in
             RealmManager.shared.delete(target)
             tableView.reloadData()
+            self?.delegate?.deleteButtonTapped()
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])

@@ -90,31 +90,4 @@ final class MainView: BaseView {
                 .offset(-16)
         }
     }
-    
-    override func configureUI() {
-        super.configureUI()
-        
-        newTodoButton.addTarget(
-            self,
-            action: #selector(newTodoButtonTapped),
-            for: .touchUpInside
-        )
-        addListButton.addTarget(
-            self,
-            action: #selector(addListButtonTapped),
-            for: .touchUpInside
-        )
-    }
-    
-    @objc
-    func newTodoButtonTapped() {
-        let nextViewController = RegisterViewController(baseView: RegisterView())
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        NavigationManager.shared.presentVC(navigationController)
-    }
-    
-    @objc
-    func addListButtonTapped() {
-//        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()))
-    }
 }

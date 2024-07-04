@@ -10,6 +10,8 @@ import UIKit
 final class RegisterViewController: BaseViewController<RegisterView> {
     private let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
     
+    weak var delegate: RegisterViewControllerDelegate?
+    
     private lazy var leftBarButton = {
         let barButton = UIBarButtonItem(
             title: "취소",
@@ -155,6 +157,8 @@ final class RegisterViewController: BaseViewController<RegisterView> {
             priority: priority
         ))
         
+        delegate?.saveButtonTapped()
+        
         NavigationManager.shared.dismiss(animated: true)
     }
 }
@@ -178,4 +182,8 @@ extension RegisterViewController: DetailInputDelegate {
             baseView.imageTextField.content.text = text
         }
     }
+}
+
+protocol RegisterViewControllerDelegate: AnyObject {
+    func saveButtonTapped()
 }

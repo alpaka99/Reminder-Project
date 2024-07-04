@@ -7,8 +7,11 @@
 
 import UIKit
 
+import RealmSwift
+
 final class MainViewController: BaseViewController<MainView> {
-    private let categories = RealmManager.shared.readAll(Category.self)
+    private var categories = RealmManager.shared.readAll(Category.self)
+    
     
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),
@@ -17,6 +20,12 @@ final class MainViewController: BaseViewController<MainView> {
         action: #selector(rightBarButtonTapped)
     )
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        categories = RealmManager.shared.readAll(Category.self)
+    }
     
     override func configureUI() {
         super.configureUI()
@@ -34,6 +43,23 @@ final class MainViewController: BaseViewController<MainView> {
         baseView.collectionView.delegate = self
         baseView.collectionView.dataSource = self
         baseView.collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+        
+        
+        baseView.newTodoButton.addTarget(
+            self,
+            action: #selector(newTodoButtonTapped),
+            for: .touchUpInside
+        )
+    }
+    
+    @objc
+    func newTodoButtonTapped() {
+        let registerViewController = RegisterViewController(baseView: RegisterView())
+        
+        registerViewController.delegate = self
+        
+        let navigationController = UINavigationController(rootViewController: registerViewController)
+        NavigationManager.shared.presentVC(navigationController)
     }
 }
 
@@ -54,8 +80,34 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         
-        NavigationManager.shared.pushVC(ListViewController(baseView: ListView()), animated: true)
+        let category = categories[indexPath.row]
+        
+        let listViewController = ListViewController(
+            baseView: ListView(),
+            category: category
+        )
+        
+        listViewController.delegate = self
+        
+        NavigationManager.shared.pushVC(listViewController)
+            
     }
 }
 
+extension MainViewController: RegisterViewControllerDelegate {
+    func saveButtonTapped() {
+        categories = RealmManager.shared.readAll(Category.self)
+        baseView.collectionView.reloadData()
+    }
+}
 
+extension MainViewController: ListViewControllerDelegate {
+    func deleteButtonTapped() {
+        categories = RealmManager.shared.readAll(Category.self)
+        baseView.collectionView.reloadData()
+    }
+}
+
+protocol ListViewControllerDelegate: AnyObject {
+    func deleteButtonTapped()
+}

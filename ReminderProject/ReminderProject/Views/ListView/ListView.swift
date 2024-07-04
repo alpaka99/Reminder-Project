@@ -12,7 +12,6 @@ import SnapKit
 final class ListView: BaseView {
     let titleLabel = {
         let label = UILabel()
-        label.text = "전체"
         label.textColor = .systemBlue
         label.font = .systemFont(ofSize: 40, weight: .bold)
         return label
@@ -46,5 +45,9 @@ final class ListView: BaseView {
                 .offset(16)
             $0.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
+    }
+    
+    func configureData(_ data: Category) {
+        titleLabel.text = data.categoryName
     }
 }

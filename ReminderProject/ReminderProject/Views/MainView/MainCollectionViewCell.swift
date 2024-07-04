@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RealmSwift
 import SnapKit
 
 final class MainCollectionViewCell: BaseCollectionViewCell {
@@ -82,7 +83,13 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         
         title.text = category.categoryName
         
-        number.text = "10"
+        let count = RealmManager.shared.readAll(Todos.self)
+            .where {
+                $0.tag == category.categoryName
+            }
+            .count
+        
+        number.text = String(count)
     }
     
     override func draw(_ rect: CGRect) {
