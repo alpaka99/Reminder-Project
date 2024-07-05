@@ -52,7 +52,26 @@ final class MainViewController: BaseViewController<MainView> {
     override func configureUI() {
         super.configureUI()
         
+        
+        navigationItem.leftBarButtonItem = leftBarButton
+        
         navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.collectionView.delegate = self
+        baseView.collectionView.dataSource = self
+        baseView.collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
+        
+        
+        baseView.newTodoButton.addTarget(
+            self,
+            action: #selector(newTodoButtonTapped),
+            for: .touchUpInside
+        )
     }
     
     func reloadData() {
@@ -75,27 +94,16 @@ final class MainViewController: BaseViewController<MainView> {
     
     @objc
     func leftBarButtonTapped() {
+        let calendarAlertViewController = CalendarAlertViewController(baseView: CalendarAlertView())
+        calendarAlertViewController.modalPresentationStyle = .overFullScreen
         
+        NavigationManager.shared.presentVC(calendarAlertViewController, animated: true)
     }
     
     @objc func rightBarButtonTapped() {
         print(#function)
     }
     
-    override func configureDelegate() {
-        super.configureDelegate()
-        
-        baseView.collectionView.delegate = self
-        baseView.collectionView.dataSource = self
-        baseView.collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
-        
-        
-        baseView.newTodoButton.addTarget(
-            self,
-            action: #selector(newTodoButtonTapped),
-            for: .touchUpInside
-        )
-    }
     
     @objc
     func newTodoButtonTapped() {
