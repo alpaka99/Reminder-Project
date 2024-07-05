@@ -53,7 +53,7 @@ final class MainViewController: BaseViewController<MainView> {
     override func configureUI() {
         super.configureUI()
         
-        baseView.titleLabel.text = currentDate.formatted()
+        baseView.titleLabel.text = DateHelper.shared.string(from: currentDate)
         
         navigationItem.leftBarButtonItem = leftBarButton
         navigationItem.rightBarButtonItem = rightBarbutton
@@ -76,7 +76,7 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     func reloadData() {
-        baseView.titleLabel.text = currentDate.formatted()
+        baseView.titleLabel.text = DateHelper.shared.string(from: currentDate)
         
         
         todayTodos = Array(totalTodos).filter {
