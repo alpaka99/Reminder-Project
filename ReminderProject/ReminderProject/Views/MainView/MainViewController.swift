@@ -11,18 +11,19 @@ import RealmSwift
 
 final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
+    private var currentDate = Date.now
     private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
     private lazy var todayTodos: [Todo] = Array(totalTodos).filter {
         // MARK: 오늘날짜와 비교하는 로직 필요
         if let dueDate = $0.dueDate {
-            return Calendar.current.isDateInToday(dueDate)
+            return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
         } else {
             return false
         }
     }
     private lazy var scheduledTodos: [Todo] = Array(totalTodos).filter {
             if let dueDate = $0.dueDate {
-                return dueDate > Date.now
+                return dueDate > currentDate
             } else {
                 return false
             }
@@ -52,9 +53,9 @@ final class MainViewController: BaseViewController<MainView> {
     override func configureUI() {
         super.configureUI()
         
+        baseView.titleLabel.text = currentDate.formatted()
         
         navigationItem.leftBarButtonItem = leftBarButton
-        
         navigationItem.rightBarButtonItem = rightBarbutton
     }
     
@@ -75,9 +76,12 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     func reloadData() {
+        baseView.titleLabel.text = currentDate.formatted()
+        
+        
         todayTodos = Array(totalTodos).filter {
             if let dueDate = $0.dueDate {
-                return Calendar.current.isDateInToday(dueDate)
+                return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
             } else {
                 return false
             }
@@ -85,17 +89,21 @@ final class MainViewController: BaseViewController<MainView> {
         
         scheduledTodos = Array(totalTodos).filter {
             if let dueDate = $0.dueDate {
-                return dueDate > Date.now
+                return dueDate > currentDate
             } else {
                 return false
             }
         }
+        
+        baseView.collectionView.reloadData()
     }
     
     @objc
     func leftBarButtonTapped() {
         let calendarAlertViewController = CalendarAlertViewController(baseView: CalendarAlertView())
         calendarAlertViewController.modalPresentationStyle = .overFullScreen
+        
+        calendarAlertViewController.delegate = self
         
         NavigationManager.shared.presentVC(calendarAlertViewController, animated: true)
     }
@@ -130,7 +138,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         switch type {
         case .today:
             count = todayTodos.count
-            print(count)
         case .scheduled:
             count = scheduledTodos.count
         case .total:
@@ -172,6 +179,13 @@ extension MainViewController: ListViewControllerDelegate {
     func deleteButtonTapped() {
         reloadData()
         baseView.collectionView.reloadData()
+    }
+}
+
+extension MainViewController: CalendarAlertViewControllerDelegate {
+    func conformButtonTapped(to date: Date) {
+        currentDate = date
+        reloadData()
     }
 }
 

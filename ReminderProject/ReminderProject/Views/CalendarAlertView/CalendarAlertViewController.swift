@@ -55,11 +55,11 @@ final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
 
 extension CalendarAlertViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-        print(dateComponents)
-    }
-    
-    func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
-        print(#function)
+        guard let dateComponents = dateComponents else { return }
+        
+        guard let date = Calendar.current.date(from: dateComponents) else { return }
+        
+        delegate?.conformButtonTapped(to: date)
     }
 }
 
@@ -70,5 +70,5 @@ extension CalendarAlertViewController: UIGestureRecognizerDelegate {
 }
 
 protocol CalendarAlertViewControllerDelegate: AnyObject {
-    func conformButtonTapped()
+    func conformButtonTapped(to date: Date)
 }
