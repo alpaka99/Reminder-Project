@@ -14,7 +14,17 @@ final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
     override func configureUI() {
         super.configureUI()
         
-        view.backgroundColor = .black.withAlphaComponent(0.3)
+        baseView.backgroundColor = .black.withAlphaComponent(0.3)
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(backgroundTapped)
+        )
+        
+        tapGesture.delegate = self
+        
+        baseView.addGestureRecognizer(
+            tapGesture
+        )
     }
     
     override func configureDelegate() {
@@ -36,6 +46,10 @@ final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
     @objc func conformButtonTapped() {
         dismiss(animated: true)
     }
+    
+    @objc func backgroundTapped() {
+        dismiss(animated: true)
+    }
 }
 
 
@@ -46,6 +60,12 @@ extension CalendarAlertViewController: UICalendarViewDelegate, UICalendarSelecti
     
     func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
         print(#function)
+    }
+}
+
+extension CalendarAlertViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
     }
 }
 
