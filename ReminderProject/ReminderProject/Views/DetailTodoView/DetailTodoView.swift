@@ -71,9 +71,9 @@ final class DetailTodoView: BaseView {
         return stack
     }()
     
-    private var todo: Todos
+    private var todo: Todo
     
-    init(todo: Todos) {
+    init(todo: Todo) {
         self.todo = todo
         
         super.init(frame: .zero)

@@ -148,10 +148,9 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         let priority = Int(baseView.priorityTextField.content.text ?? "0")
         
         
-        RealmManager.shared.create(Todos(
+        RealmManager.shared.create(Todo(
             title: title,
             content: content, 
-            category: "식품",
             dueDate: DateHelper.shared.date(from: dueDate),
             tag: tag,
             priority: priority

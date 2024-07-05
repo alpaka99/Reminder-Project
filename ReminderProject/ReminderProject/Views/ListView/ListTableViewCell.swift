@@ -100,7 +100,7 @@ final class ListTableViewCell: BaseTableViewCell {
         tagLabel.textColor = .systemBlue
     }
     
-    func configureData(_ data: Todos) {
+    func configureData(_ data: Todo) {
         title.text = data.title
         content.text = data.content
         dateLabel.text = DateHelper.shared.string(from: data.dueDate)

@@ -11,14 +11,23 @@ import RealmSwift
 
 final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
-    private var totalTodos = RealmManager.shared.readAll(Todo.self)
-    private lazy var todayTodos: Results<Todo> = totalTodos.where {
+    private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
+    private lazy var todayTodos: [Todo] = Array(totalTodos).filter {
         // MARK: 오늘날짜와 비교하는 로직 필요
-        $0.dueDate == Date.now
+        if let dueDate = $0.dueDate {
+            return Calendar.current.isDateInToday(dueDate)
+        } else {
+            return false
+        }
     }
-    private lazy var scheduledTodos: Results<Todo> = totalTodos.where {
-        $0.dueDate > Date.now
-    }
+    private lazy var scheduledTodos: [Todo] = Array(totalTodos).filter {
+            if let dueDate = $0.dueDate {
+                return dueDate > Date.now
+            } else {
+                return false
+            }
+        }
+    
     private lazy var flagedTodos: Results<Todo> = totalTodos.where {
         $0.flaged == true
     }
@@ -44,6 +53,24 @@ final class MainViewController: BaseViewController<MainView> {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
+    }
+    
+    func reloadData() {
+        todayTodos = Array(totalTodos).filter {
+            if let dueDate = $0.dueDate {
+                return Calendar.current.isDateInToday(dueDate)
+            } else {
+                return false
+            }
+        }
+        
+        scheduledTodos = Array(totalTodos).filter {
+            if let dueDate = $0.dueDate {
+                return dueDate > Date.now
+            } else {
+                return false
+            }
+        }
     }
     
     @objc
@@ -90,7 +117,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.identifier, for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
         
         let type = categories[indexPath.row]
-        cell.configureData(type, count: 10)
+        
+        var count = 0
+        switch type {
+        case .today:
+            count = todayTodos.count
+            print(count)
+        case .scheduled:
+            count = scheduledTodos.count
+        case .total:
+            count = totalTodos.count
+        case .flaged:
+            count = flagedTodos.count
+        case .completed:
+            count = completedTodos.count
+        }
+        cell.configureData(type, count: count)
         
         return cell
     }
@@ -108,18 +150,19 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         listViewController.delegate = self
         
         NavigationManager.shared.pushVC(listViewController)
-            
     }
 }
 
 extension MainViewController: RegisterViewControllerDelegate {
     func saveButtonTapped() {
+        reloadData()
         baseView.collectionView.reloadData()
     }
 }
 
 extension MainViewController: ListViewControllerDelegate {
     func deleteButtonTapped() {
+        reloadData()
         baseView.collectionView.reloadData()
     }
 }

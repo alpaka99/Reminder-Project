@@ -18,7 +18,7 @@ final class ListViewController: BaseViewController<ListView> {
     )
     
     private var category: TodoCategory
-    private lazy var results = RealmManager.shared.readAll(Todos.self)
+    private lazy var results = RealmManager.shared.readAll(Todo.self)
         .where {
             $0.tag == category.title
         }
