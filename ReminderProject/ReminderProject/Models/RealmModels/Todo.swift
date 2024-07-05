@@ -9,34 +9,30 @@ import Foundation
 
 import RealmSwift
 
-final class Todos: Object {
+final class Todo: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var createdAt: Date
+    @Persisted var createdAt: Date = Date.now
     
     @Persisted var title: String
     @Persisted var content: String?
-    @Persisted(indexed: true) var category: String
     @Persisted var dueDate: Date?
     @Persisted var priority: Int?
     @Persisted var tag: String?
-    
+    @Persisted var flaged: Bool = false
+    @Persisted var completed: Bool = false
     
     convenience init(
-        createdAt: Date = Date.now,
         title: String,
         content: String? = nil,
-        category: String,
         dueDate: Date? = nil,
         tag: String? = nil,
         priority: Int? = nil
     ) {
         self.init()
         
-        self.createdAt = createdAt
         
         self.title = title
         self.content = content
-        self.category = category
         self.dueDate = dueDate
         self.tag = tag
         self.priority = priority

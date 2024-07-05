@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RealmSwift
 import SnapKit
 
 final class MainCollectionViewCell: BaseCollectionViewCell {
@@ -73,16 +74,16 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         number.textColor = .white
     }
     
-    internal func configureData(_ type: TodoCategory) {
-        iconBackground.backgroundColor = type.backgroundColor
-        icon.image = UIImage(systemName: type.systemName)
+    internal func configureData(_ category: TodoCategory, count: Int) {
+        iconBackground.backgroundColor = category.backgroundColor
+        icon.image = UIImage(systemName: category.systemName)
         icon.tintColor = .white
         icon.contentMode = .scaleAspectFit
         
         
-        title.text = type.title
+        title.text = category.title
         
-        number.text = "10"
+        number.text = String(count)
     }
     
     override func draw(_ rect: CGRect) {

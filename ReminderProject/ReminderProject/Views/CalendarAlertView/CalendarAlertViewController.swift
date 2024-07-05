@@ -1,0 +1,74 @@
+//
+//  CalendarAlertViewController.swift
+//  ReminderProject
+//
+//  Created by user on 7/5/24.
+//
+
+import UIKit
+
+final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
+    
+    weak var delegate: CalendarAlertViewControllerDelegate?
+    
+    override func configureUI() {
+        super.configureUI()
+        
+        baseView.backgroundColor = .black.withAlphaComponent(0.3)
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(backgroundTapped)
+        )
+        
+        tapGesture.delegate = self
+        
+        baseView.addGestureRecognizer(
+            tapGesture
+        )
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.calendarView.delegate = self
+        let selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
+        baseView.calendarView.selectionBehavior = selectionBehavior
+        
+        baseView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        baseView.conformButton.addTarget(self, action: #selector(conformButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    func cancelButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    @objc func conformButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    @objc func backgroundTapped() {
+        dismiss(animated: true)
+    }
+}
+
+
+extension CalendarAlertViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        guard let dateComponents = dateComponents else { return }
+        
+        guard let date = Calendar.current.date(from: dateComponents) else { return }
+        
+        delegate?.conformButtonTapped(to: date)
+    }
+}
+
+extension CalendarAlertViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
+    }
+}
+
+protocol CalendarAlertViewControllerDelegate: AnyObject {
+    func conformButtonTapped(to date: Date)
+}

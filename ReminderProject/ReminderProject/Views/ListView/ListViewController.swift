@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RealmSwift
+
 final class ListViewController: BaseViewController<ListView> {
     private lazy var rightBarbutton = UIBarButtonItem(
         image: UIImage(systemName: "ellipsis.circle"),
@@ -15,12 +17,24 @@ final class ListViewController: BaseViewController<ListView> {
         action: #selector(rightBarButtonTapped)
     )
     
-    private var results = RealmManager.shared.readAll(Todos.self)
+    private var category: TodoCategory
+    private lazy var results = RealmManager.shared.readAll(Todo.self)
+        .where {
+            $0.tag == category.title
+        }
+    
+    weak var delegate: ListViewControllerDelegate?
+    
+    init(baseView: ListView, category: TodoCategory) {
+        self.category = category
+        super.init(baseView: baseView)
+    }
     
     override func configureUI() {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
+        baseView.configureData(category)
     }
     
     override func configureDelegate() {
@@ -44,31 +58,37 @@ final class ListViewController: BaseViewController<ListView> {
             title: "카테고리 순",
             style: .default
         ) {[weak self] _ in
-            self?.results = self?.results?.sorted(
+            if let results = self?.results.sorted(
                 byKeyPath: "category",
                 ascending: true
-            )
-            self?.baseView.tableView.reloadData()
+            ) {
+                self?.results = results
+                self?.baseView.tableView.reloadData()
+            }
         }
         let titleSort = UIAlertAction(
             title: "이름 순",
             style: .default
         ) { [weak self] _ in
-            self?.results = self?.results?.sorted(
+            if let results = self?.results.sorted(
                 byKeyPath: "title",
                 ascending: true
-            )
-            self?.baseView.tableView.reloadData()
+            ) {
+                self?.results = results
+                self?.baseView.tableView.reloadData()
+            }
         }
         let memoSort = UIAlertAction(
             title: "마감일 순",
             style: .default
         ) { [weak self] _ in
-            self?.results = self?.results?.sorted(
+            if let results = self?.results.sorted(
                 byKeyPath: "dueDate",
                 ascending: true
-            )
-            self?.baseView.tableView.reloadData()
+            ) {
+                self?.results = results
+                self?.baseView.tableView.reloadData()
+            }
         }
         
         ac.addAction(dueDateSort)
@@ -81,20 +101,19 @@ final class ListViewController: BaseViewController<ListView> {
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results?.count ?? 0
+        return results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
-        if let data = results?[indexPath.row] {
-            cell.configureData(data)
-        }
+        let data = results[indexPath.row]
+        cell.configureData(data)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        guard let data = results?[indexPath.row] else { return }
+        let data = results[indexPath.row]
         
         NavigationManager.shared.pushVC(DetailTodoViewController(baseView: DetailTodoView(todo: data)))
     }
@@ -104,16 +123,15 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let target = results?[indexPath.row]
+        let target = results[indexPath.row]
         
         let deleteAction = UIContextualAction(
             style: .destructive,
             title: "삭제"
-        ) { _, _, _ in
-            if let target = target {
-                RealmManager.shared.delete(target)
-                tableView.reloadData()
-            }
+        ) { [weak self] _, _, _ in
+            RealmManager.shared.delete(target)
+            tableView.reloadData()
+            self?.delegate?.deleteButtonTapped()
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
