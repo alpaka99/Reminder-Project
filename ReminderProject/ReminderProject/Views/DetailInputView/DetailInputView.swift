@@ -116,7 +116,7 @@ final class DetailInputView: BaseView {
             guard let date = DateHelper.shared.string(from: datePicker.date) else { return "" }
             return date
         case .tag:
-            if let text = textField.text {
+            if let text = textField.text, !text.isEmpty {
                 return "#" + text
             }
         case .priority:
