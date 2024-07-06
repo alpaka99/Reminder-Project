@@ -36,7 +36,7 @@ final class DetailInputView: BaseView {
     }()
     
     let segmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["High🔴", "Middle🟡", "Low🟣"])
+        let segmentedControl = UISegmentedControl(items: TodoPriority.allContents)
         
         segmentedControl.backgroundColor = .darkGray
         segmentedControl.selectedSegmentIndex = 0
@@ -120,7 +120,7 @@ final class DetailInputView: BaseView {
                 return "#" + text
             }
         case .priority:
-            return String(segmentedControl.selectedSegmentIndex)
+            return TodoPriority.init(rawValue: segmentedControl.selectedSegmentIndex)?.content ?? ""
         case .image:
             return "Comming Soon"
         }

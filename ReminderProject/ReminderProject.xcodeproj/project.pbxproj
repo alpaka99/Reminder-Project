@@ -48,6 +48,7 @@
 		CED1E1242C36D6FC004BFBE1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */; };
 		CED1E1272C3840C6004BFBE1 /* CalendarAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1262C3840C6004BFBE1 /* CalendarAlertViewController.swift */; };
 		CED1E1292C3840CE004BFBE1 /* CalendarAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1282C3840CE004BFBE1 /* CalendarAlertView.swift */; };
+		CED1E12B2C392962004BFBE1 /* TodoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E12A2C392962004BFBE1 /* TodoPriority.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CED1E1262C3840C6004BFBE1 /* CalendarAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertViewController.swift; sourceTree = "<group>"; };
 		CED1E1282C3840CE004BFBE1 /* CalendarAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertView.swift; sourceTree = "<group>"; };
+		CED1E12A2C392962004BFBE1 /* TodoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPriority.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				CED1E0A82C340DEE004BFBE1 /* TodoCategory.swift */,
 				CED1E0D02C35ADA4004BFBE1 /* RegisterFieldType.swift */,
 				CED1E0D72C35C851004BFBE1 /* DateHelper.swift */,
+				CED1E12A2C392962004BFBE1 /* TodoPriority.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED1E0B42C341ED3004BFBE1 /* BaseTableViewCell.swift in Sources */,
+				CED1E12B2C392962004BFBE1 /* TodoPriority.swift in Sources */,
 				CED1E0DD2C360BFE004BFBE1 /* DetailTodoViewController.swift in Sources */,
 				CED1E0DB2C360BA6004BFBE1 /* DetailTodoView.swift in Sources */,
 				CED1E1222C36D6CA004BFBE1 /* UIColor+Extension.swift in Sources */,

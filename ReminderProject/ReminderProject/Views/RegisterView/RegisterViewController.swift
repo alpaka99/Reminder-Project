@@ -142,15 +142,19 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         }
         
         let content = baseView.memoView.textView.text
-        let dueDate = baseView.dueDateTextField.content.text ?? ""
-        let tag = baseView.tagTextField.content.text
-        let priority = Int(baseView.priorityTextField.content.text ?? "0")
         
+        let unFormattedDueDate = baseView.dueDateTextField.content.text ?? ""
+        let dueDate = DateHelper.shared.date(from: unFormattedDueDate)
+        
+        let tag = baseView.tagTextField.content.text
+        
+        let unConvertedPriority = baseView.priorityTextField.content.text ?? ""
+        let priority = TodoPriority.stringInit(rawString: unConvertedPriority)?.rawValue
         
         RealmManager.shared.create(Todo(
             title: title,
             content: content, 
-            dueDate: DateHelper.shared.date(from: dueDate),
+            dueDate: dueDate,
             tag: tag,
             priority: priority
         ))
@@ -167,7 +171,7 @@ extension RegisterViewController: UITextViewDelegate {
     }
 }
 
-extension RegisterViewController: DetailInputDelegate {
+extension RegisterViewController: DetailInputViewControllerDelegate {
     func sendDetailData(_ type: RegisterFieldType, text: String) {
         switch type {
         case .dueDate:
