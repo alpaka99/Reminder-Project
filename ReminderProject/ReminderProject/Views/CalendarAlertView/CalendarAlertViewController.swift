@@ -10,6 +10,7 @@ import UIKit
 final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
     
     weak var delegate: CalendarAlertViewControllerDelegate?
+    var currentDate = Date.now
     
     override func configureUI() {
         super.configureUI()
@@ -44,6 +45,7 @@ final class CalendarAlertViewController: BaseViewController<CalendarAlertView> {
     }
     
     @objc func conformButtonTapped() {
+        delegate?.conformButtonTapped(to: currentDate)
         dismiss(animated: true)
     }
     
@@ -57,9 +59,9 @@ extension CalendarAlertViewController: UICalendarViewDelegate, UICalendarSelecti
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         guard let dateComponents = dateComponents else { return }
         
-        guard let date = Calendar.current.date(from: dateComponents) else { return }
+        guard let selectedDate = Calendar.current.date(from: dateComponents) else { return }
         
-        delegate?.conformButtonTapped(to: date)
+        currentDate = selectedDate
     }
 }
 
