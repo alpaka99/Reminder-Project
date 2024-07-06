@@ -15,10 +15,11 @@ final class DetailInputView: BaseView {
     let datePicker = {
         let datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
-        
+        datePicker.preferredDatePickerStyle = .inline
         
         datePicker.backgroundColor = .white
         datePicker.alpha = 0
+        datePicker.layer.cornerRadius = 8
         
         return datePicker
     }()
@@ -28,13 +29,14 @@ final class DetailInputView: BaseView {
         
         textField.backgroundColor = .darkGray
         textField.layer.cornerRadius = 8
+        textField.placeholder = "태그를 입력해주세요"
         textField.alpha = 0
         
         return textField
     }()
     
     let segmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["High🔴", "Middle🟡", "Low🟣"])
+        let segmentedControl = UISegmentedControl(items: TodoPriority.allContents)
         
         segmentedControl.backgroundColor = .darkGray
         segmentedControl.selectedSegmentIndex = 0
@@ -43,22 +45,12 @@ final class DetailInputView: BaseView {
         return segmentedControl
     }()
     
-    let imagePicker = {
-        let label = UILabel()
-        
-        label.text = "Comming soon..."
-        label.alpha = 0
-        
-        return label
-    }()
-    
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(datePicker)
         self.addSubview(textField)
         self.addSubview(segmentedControl)
-        self.addSubview(imagePicker)
     }
     
     override func configureLayout() {
@@ -66,30 +58,22 @@ final class DetailInputView: BaseView {
         
         datePicker.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
         }
         
         textField.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
+            $0.height.equalTo(50)
         }
         
         segmentedControl.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
-        }
-        
-        imagePicker.snp.makeConstraints {
-            $0.center.equalTo(self)
             $0.height.equalTo(50)
-            $0.width.equalTo(self.snp.width)
-                .multipliedBy(0.8)
         }
     }
     
@@ -105,7 +89,7 @@ final class DetailInputView: BaseView {
         case .priority:
             segmentedControl.alpha = 1
         case .image:
-            imagePicker.alpha = 1
+            break
         }
     }
     
@@ -116,13 +100,13 @@ final class DetailInputView: BaseView {
             guard let date = DateHelper.shared.string(from: datePicker.date) else { return "" }
             return date
         case .tag:
-            if let text = textField.text {
-                return text
+            if let text = textField.text, !text.isEmpty {
+                return "#" + text
             }
         case .priority:
-            return String(segmentedControl.selectedSegmentIndex)
+            return TodoPriority.init(rawValue: segmentedControl.selectedSegmentIndex)?.content ?? ""
         case .image:
-            return "Comming Soon"
+            return "Wrong Access to DetailInputView"
         }
         
         return ""

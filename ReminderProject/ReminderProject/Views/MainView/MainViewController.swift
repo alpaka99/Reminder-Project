@@ -109,7 +109,7 @@ final class MainViewController: BaseViewController<MainView> {
     }
     
     @objc func rightBarButtonTapped() {
-        print(#function)
+        
     }
     
     

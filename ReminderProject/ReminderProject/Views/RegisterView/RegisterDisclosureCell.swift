@@ -28,6 +28,15 @@ final class RegisterDisclosureCell: BaseView {
         return label
     }()
     
+    let thumbnailImage = {
+        let imageView = UIImageView()
+        
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
     let trailingButton = {
         let button = UIButton()
         
@@ -42,6 +51,7 @@ final class RegisterDisclosureCell: BaseView {
         
         self.addSubview(title)
         self.addSubview(content)
+        self.addSubview(thumbnailImage)
         self.addSubview(trailingButton)
     }
     
@@ -55,13 +65,6 @@ final class RegisterDisclosureCell: BaseView {
                 .inset(16)
         }
         
-        content.snp.makeConstraints {
-            $0.leading.equalTo(title.snp.trailing)
-                .offset(16)
-            $0.verticalEdges.equalTo(self.snp.verticalEdges)
-                .inset(16)
-        }
-        
         trailingButton.snp.makeConstraints {
             $0.verticalEdges.equalTo(self.snp.verticalEdges)
                 .inset(16)
@@ -70,6 +73,24 @@ final class RegisterDisclosureCell: BaseView {
             $0.width.equalTo(trailingButton.snp.height)
                 .multipliedBy(1)
         }
+        
+        content.snp.makeConstraints {
+            $0.trailing.equalTo(trailingButton.snp.leading)
+                .offset(-16)
+            $0.verticalEdges.equalTo(self.snp.verticalEdges)
+                .inset(16)
+        }
+        
+        thumbnailImage.snp.makeConstraints {
+            $0.verticalEdges.equalTo(self.snp.verticalEdges)
+                .inset(8)
+            $0.trailing.equalTo(content.snp.leading)
+                .offset(-16)
+            
+            $0.size.equalTo(44)
+        }
+        
+        
     }
     
     override func configureUI() {
@@ -78,9 +99,6 @@ final class RegisterDisclosureCell: BaseView {
         self.backgroundColor = .darkGray
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
-        
-        title.textColor = .systemGray4
-        title.font = .systemFont(ofSize: 16, weight: .semibold)
     }
     
     func configureData(_ text: String) {
