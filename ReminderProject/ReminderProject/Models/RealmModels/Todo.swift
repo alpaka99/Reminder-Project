@@ -37,4 +37,10 @@ final class Todo: Object {
         self.tag = tag
         self.priority = priority
     }
+    
+    var useThisToFilterDate: Date? {
+        guard let dueDate = self.dueDate else { return  nil }
+        
+        return dueDate
+    }
 }

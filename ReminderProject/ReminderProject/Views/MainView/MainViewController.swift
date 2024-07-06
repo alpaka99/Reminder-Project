@@ -14,19 +14,15 @@ final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
     private var currentDate = Date.now
     private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
-    private lazy var todayTodos: [Todo] = Array(totalTodos).filter {
-        if let dueDate = $0.dueDate {
-            return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
-        } else {
-            return false
+    private lazy var todayTodos = totalTodos.where {
+        let start = Calendar.current.startOfDay(for: currentDate)
+        if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
+            return $0.dueDate >= start && $0.dueDate < end
         }
+        return $0.dueDate == Date.now
     }
-    private lazy var scheduledTodos: [Todo] = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return dueDate > currentDate
-            } else {
-                return false
-            }
+    private lazy var scheduledTodos = totalTodos.where {
+            return $0.dueDate > currentDate
         }
     
     private lazy var flagedTodos: Results<Todo> = totalTodos.where {
@@ -78,21 +74,16 @@ final class MainViewController: BaseViewController<MainView> {
     func reloadData() {
         baseView.titleLabel.text = DateHelper.shared.string(from: currentDate)
         
-        
-        todayTodos = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
-            } else {
-                return false
+        todayTodos = totalTodos.where {
+            let start = Calendar.current.startOfDay(for: currentDate)
+            if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
+                return $0.dueDate >= start && $0.dueDate < end
             }
+            return $0.dueDate == Date.now
         }
         
-        scheduledTodos = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return dueDate > currentDate
-            } else {
-                return false
-            }
+        scheduledTodos = totalTodos.where {
+            return $0.dueDate > currentDate
         }
         
         baseView.collectionView.reloadData()
@@ -163,23 +154,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .total:
             todos = totalTodos
         case .today:
-            let list = List<Todo>()
-            list.append(objectsIn: todayTodos)
-            if let convertedResults = AnyRealmCollection(list) as? Results<Todo> {
-                todos = convertedResults
-                print("hi")
-            } else {
-                print("Results convertion failed")
-            }
+            todos = todayTodos
         case .scheduled:
-            let list = List<Todo>()
-            list.append(objectsIn: scheduledTodos)
-            if let convertedResults = AnyRealmCollection(list) as? Results<Todo> {
-                todos = convertedResults
-                print("hi")
-            } else {
-                print("Results convertion failed")
-            }
+            todos = scheduledTodos
         case .flaged:
             todos = flagedTodos
         case .completed:
