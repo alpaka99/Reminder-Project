@@ -14,6 +14,7 @@ final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
     private var currentDate = Date.now
     private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
+    // https://stackoverflow.com/questions/35964884/how-do-i-filter-events-created-for-the-current-date-in-the-realm-swift/35965216#35965216
     private lazy var todayTodos = totalTodos.where {
         let start = Calendar.current.startOfDay(for: currentDate)
         if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {

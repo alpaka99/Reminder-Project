@@ -104,7 +104,9 @@ final class ListTableViewCell: BaseTableViewCell {
         title.text = data.title
         content.text = data.content
         dateLabel.text = DateHelper.shared.string(from: data.dueDate)
-        priority.text = String(data.priority ?? -1)
+        if let priorityInt = data.priority, let priorityEmoji = TodoPriority.init(rawValue: priorityInt)?.emoji {
+            priority.text = priorityEmoji
+        }
         tagLabel.text = data.tag
     }
 }
