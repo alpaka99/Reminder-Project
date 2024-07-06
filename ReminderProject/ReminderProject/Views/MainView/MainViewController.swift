@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Realm
 import RealmSwift
 
 final class MainViewController: BaseViewController<MainView> {
@@ -14,7 +15,6 @@ final class MainViewController: BaseViewController<MainView> {
     private var currentDate = Date.now
     private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
     private lazy var todayTodos: [Todo] = Array(totalTodos).filter {
-        // MARK: 오늘날짜와 비교하는 로직 필요
         if let dueDate = $0.dueDate {
             return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
         } else {
@@ -157,14 +157,46 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let category = categories[indexPath.row]
         
-        let listViewController = ListViewController(
-            baseView: ListView(),
-            category: category
-        )
+        var todos: Results<Todo>?
         
-        listViewController.delegate = self
+        switch category {
+        case .total:
+            todos = totalTodos
+        case .today:
+            let list = List<Todo>()
+            list.append(objectsIn: todayTodos)
+            if let convertedResults = AnyRealmCollection(list) as? Results<Todo> {
+                todos = convertedResults
+                print("hi")
+            } else {
+                print("Results convertion failed")
+            }
+        case .scheduled:
+            let list = List<Todo>()
+            list.append(objectsIn: scheduledTodos)
+            if let convertedResults = AnyRealmCollection(list) as? Results<Todo> {
+                todos = convertedResults
+                print("hi")
+            } else {
+                print("Results convertion failed")
+            }
+        case .flaged:
+            todos = flagedTodos
+        case .completed:
+            todos = completedTodos
+        }
         
-        NavigationManager.shared.pushVC(listViewController)
+        if let todos = todos {
+            let listViewController = ListViewController(
+                baseView: ListView(),
+                category: category,
+                todos: todos
+            )
+            
+            listViewController.delegate = self
+            
+            NavigationManager.shared.pushVC(listViewController)
+        }
     }
 }
 
