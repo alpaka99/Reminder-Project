@@ -88,7 +88,6 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     
     @objc
     func dueDateTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        print(#function)
         let vc = DetailInputViewController(baseView: DetailInputView())
         
         vc.configureData(.dueDate)

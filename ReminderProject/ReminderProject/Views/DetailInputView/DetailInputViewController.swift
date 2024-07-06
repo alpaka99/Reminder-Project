@@ -27,20 +27,20 @@ final class DetailInputViewController: BaseViewController<DetailInputView> {
         guard let type = type else { return }
         baseView.configureData(type)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeButtonTapped))
     }
     
     internal func configureData(_ type: RegisterFieldType) {
         self.type = type
     }
     
-    @objc
-    func completeButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
+//    @objc
+//    func completeButtonTapped() {
+//        navigationController?.popViewController(animated: true)
+//    }
 }
 
 
 protocol DetailInputDelegate: AnyObject {
     func sendDetailData(_ type: RegisterFieldType, text: String)
 }
+

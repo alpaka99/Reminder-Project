@@ -15,10 +15,11 @@ final class DetailInputView: BaseView {
     let datePicker = {
         let datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
-        
+        datePicker.preferredDatePickerStyle = .inline
         
         datePicker.backgroundColor = .white
         datePicker.alpha = 0
+        datePicker.layer.cornerRadius = 8
         
         return datePicker
     }()
@@ -28,6 +29,7 @@ final class DetailInputView: BaseView {
         
         textField.backgroundColor = .darkGray
         textField.layer.cornerRadius = 8
+        textField.placeholder = "태그를 입력해주세요"
         textField.alpha = 0
         
         return textField
@@ -66,28 +68,26 @@ final class DetailInputView: BaseView {
         
         datePicker.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
         }
         
         textField.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
+            $0.height.equalTo(50)
         }
         
         segmentedControl.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
+            $0.height.equalTo(50)
         }
         
         imagePicker.snp.makeConstraints {
             $0.center.equalTo(self)
-            $0.height.equalTo(50)
             $0.width.equalTo(self.snp.width)
                 .multipliedBy(0.8)
         }
@@ -117,7 +117,7 @@ final class DetailInputView: BaseView {
             return date
         case .tag:
             if let text = textField.text {
-                return text
+                return "#" + text
             }
         case .priority:
             return String(segmentedControl.selectedSegmentIndex)
