@@ -5,6 +5,7 @@
 //  Created by user on 7/2/24.
 //
 
+import PhotosUI
 import UIKit
 
 final class RegisterViewController: BaseViewController<RegisterView> {
@@ -121,12 +122,15 @@ final class RegisterViewController: BaseViewController<RegisterView> {
     
     @objc
     func imageTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        let vc = DetailInputViewController(baseView: DetailInputView())
+        var config = PHPickerConfiguration()
+        config.selectionLimit = 30
+        config.mode = .default
         
-        vc.configureData(.image)
-        vc.delegate = self
+        let photoPicker = PHPickerViewController(configuration: config)
         
-        navigationController?.pushViewController(vc, animated: true)
+        photoPicker.delegate = self
+        
+        navigationController?.pushViewController(photoPicker, animated: true)
     }
     
     @objc
@@ -151,13 +155,20 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         let unConvertedPriority = baseView.priorityTextField.content.text ?? ""
         let priority = TodoPriority.stringInit(rawString: unConvertedPriority)?.rawValue
         
-        RealmManager.shared.create(Todo(
+        let newTodo = Todo(
             title: title,
-            content: content, 
+            content: content,
             dueDate: dueDate,
             tag: tag,
             priority: priority
-        ))
+        )
+        
+        RealmManager.shared.create(newTodo)
+        
+        if let image = baseView.imageTextField.thumbnailImage.image {
+            // save image method
+            saveImageToDocument(image: image, fileName: newTodo._id.stringValue)
+        }
         
         delegate?.saveButtonTapped()
         
@@ -180,9 +191,27 @@ extension RegisterViewController: DetailInputViewControllerDelegate {
             baseView.tagTextField.content.text = text
         case .priority:
             baseView.priorityTextField.content.text = text
-        case .image:
-            baseView.imageTextField.content.text = text
+        default:
+            break
         }
+    }
+}
+
+extension RegisterViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, error in
+                if let image = image as? UIImage {
+                    DispatchQueue.main.async {
+                        self?.baseView.imageTextField.thumbnailImage.image = image
+                    }
+                }
+            }
+        }
+        
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 

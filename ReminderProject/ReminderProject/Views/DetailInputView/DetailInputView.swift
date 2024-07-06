@@ -45,22 +45,12 @@ final class DetailInputView: BaseView {
         return segmentedControl
     }()
     
-    let imagePicker = {
-        let label = UILabel()
-        
-        label.text = "Comming soon..."
-        label.alpha = 0
-        
-        return label
-    }()
-    
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(datePicker)
         self.addSubview(textField)
         self.addSubview(segmentedControl)
-        self.addSubview(imagePicker)
     }
     
     override func configureLayout() {
@@ -85,12 +75,6 @@ final class DetailInputView: BaseView {
                 .multipliedBy(0.8)
             $0.height.equalTo(50)
         }
-        
-        imagePicker.snp.makeConstraints {
-            $0.center.equalTo(self)
-            $0.width.equalTo(self.snp.width)
-                .multipliedBy(0.8)
-        }
     }
     
     
@@ -105,7 +89,7 @@ final class DetailInputView: BaseView {
         case .priority:
             segmentedControl.alpha = 1
         case .image:
-            imagePicker.alpha = 1
+            break
         }
     }
     
@@ -122,7 +106,7 @@ final class DetailInputView: BaseView {
         case .priority:
             return TodoPriority.init(rawValue: segmentedControl.selectedSegmentIndex)?.content ?? ""
         case .image:
-            return "Comming Soon"
+            return "Wrong Access to DetailInputView"
         }
         
         return ""
