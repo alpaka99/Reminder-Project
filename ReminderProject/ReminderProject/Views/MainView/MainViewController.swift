@@ -87,6 +87,14 @@ final class MainViewController: BaseViewController<MainView> {
             return $0.dueDate > currentDate
         }
         
+        flagedTodos = totalTodos.where {
+            $0.flaged == true
+        }
+        
+        completedTodos = totalTodos.where {
+            $0.completed == true
+        }
+        
         baseView.collectionView.reloadData()
     }
     
@@ -186,9 +194,8 @@ extension MainViewController: RegisterViewControllerDelegate {
 }
 
 extension MainViewController: ListViewControllerDelegate {
-    func deleteButtonTapped() {
+    func itemUpdated() {
         reloadData()
-        baseView.collectionView.reloadData()
     }
 }
 
@@ -200,5 +207,5 @@ extension MainViewController: CalendarAlertViewControllerDelegate {
 }
 
 protocol ListViewControllerDelegate: AnyObject {
-    func deleteButtonTapped()
+    func itemUpdated()
 }

@@ -124,9 +124,12 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let target = todos[indexPath.row]
         
-        let flagedAction = UIContextualAction(style: .normal, title: "깃발") { _, _, _ in
+        let flagedAction = UIContextualAction(style: .normal, title: "깃발") { [weak self] _, _, _ in
             RealmManager.shared.updateFlaged(from: target)
-            print(target)
+            self?.delegate?.itemUpdated()
+            UIView.animate(withDuration: 0.3) {
+                tableView.reloadData()
+            }
         }
         
         let deleteAction = UIContextualAction(
@@ -134,8 +137,10 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             title: "삭제"
         ) { [weak self] _, _, _ in
             RealmManager.shared.delete(target)
-            tableView.reloadData()
-            self?.delegate?.deleteButtonTapped()
+            self?.delegate?.itemUpdated()
+            UIView.animate(withDuration: 0.3) {
+                tableView.reloadData()
+            }
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction, flagedAction])
