@@ -36,15 +36,40 @@ final class RealmManager {
         return result
     }
     
-    // MARK: Update
-    internal func update<T: Object> (with newValue: T) {
+    // MARK: Update to new Object
+    internal func update<T: Object>(to newValue: T) {
         do {
-            let target = realm.object(ofType: T.self, forPrimaryKey: newValue.objectSchema.primaryKeyProperty)
+            let target = realm.object(
+                ofType: T.self,
+                forPrimaryKey: newValue.objectSchema.primaryKeyProperty
+            )
+            
             try realm.write {
-                realm.add(newValue, update: .modified)
+                realm.create(
+                    T.self,
+                    value: newValue,
+                    update: .modified
+                )
             }
         } catch {
             print("Realm Update Error")
+            print(error.localizedDescription)
+        }
+    }
+    
+    internal func updateFlaged<T: Todo>(from oldValue: T) {
+        do {
+            let target = realm.object(
+                ofType: T.self,
+                forPrimaryKey: oldValue._id
+            )
+            guard let target = target else { return }
+            
+            try realm.write {
+                target.setValue(target.flaged.toggled(), forKey: "flaged")
+            }
+        } catch {
+            print("FlagValue Update Error")
             print(error.localizedDescription)
         }
     }

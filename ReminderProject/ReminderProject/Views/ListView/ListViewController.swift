@@ -53,11 +53,11 @@ final class ListViewController: BaseViewController<ListView> {
             preferredStyle: .actionSheet
         )
         let dueDateSort = UIAlertAction(
-            title: "카테고리 순",
+            title: "우선순위 순",
             style: .default
         ) {[weak self] _ in
             if let todos = self?.todos.sorted(
-                byKeyPath: "category",
+                byKeyPath: "priority",
                 ascending: true
             ) {
                 self?.todos = todos
@@ -121,7 +121,13 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let target = todos[indexPath.row]
+        
+        let flagedAction = UIContextualAction(style: .normal, title: "깃발") { _, _, _ in
+            RealmManager.shared.updateFlaged(from: target)
+            print(target)
+        }
         
         let deleteAction = UIContextualAction(
             style: .destructive,
@@ -132,6 +138,6 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
             self?.delegate?.deleteButtonTapped()
         }
         
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction, flagedAction])
     }
 }
