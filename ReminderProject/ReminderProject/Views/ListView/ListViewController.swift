@@ -109,6 +109,8 @@ final class ListViewController: BaseViewController<ListView> {
             )],
             with: .automatic
         )
+        
+        delegate?.itemUpdated()
     }
 }
 
@@ -147,7 +149,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let flagedAction = UIContextualAction(style: .normal, title: "깃발") { [weak self] _, _, _ in
             RealmManager.shared.toggleFlaged(of: target)
             self?.delegate?.itemUpdated()
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 tableView.reloadData()
             }
         }
@@ -158,7 +160,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         ) { [weak self] _, _, _ in
             RealmManager.shared.delete(target)
             self?.delegate?.itemUpdated()
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 tableView.reloadData()
             }
         }
