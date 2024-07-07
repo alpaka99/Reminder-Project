@@ -7,26 +7,23 @@
 
 import UIKit
 
+import Realm
 import RealmSwift
 
 final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
     private var currentDate = Date.now
     private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
-    private lazy var todayTodos: [Todo] = Array(totalTodos).filter {
-        // MARK: 오늘날짜와 비교하는 로직 필요
-        if let dueDate = $0.dueDate {
-            return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
-        } else {
-            return false
+    // https://stackoverflow.com/questions/35964884/how-do-i-filter-events-created-for-the-current-date-in-the-realm-swift/35965216#35965216
+    private lazy var todayTodos = totalTodos.where {
+        let start = Calendar.current.startOfDay(for: currentDate)
+        if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
+            return $0.dueDate >= start && $0.dueDate < end
         }
+        return $0.dueDate == Date.now
     }
-    private lazy var scheduledTodos: [Todo] = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return dueDate > currentDate
-            } else {
-                return false
-            }
+    private lazy var scheduledTodos = totalTodos.where {
+            return $0.dueDate > currentDate
         }
     
     private lazy var flagedTodos: Results<Todo> = totalTodos.where {
@@ -78,21 +75,24 @@ final class MainViewController: BaseViewController<MainView> {
     func reloadData() {
         baseView.titleLabel.text = DateHelper.shared.string(from: currentDate)
         
-        
-        todayTodos = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
-            } else {
-                return false
+        todayTodos = totalTodos.where {
+            let start = Calendar.current.startOfDay(for: currentDate)
+            if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
+                return $0.dueDate >= start && $0.dueDate < end
             }
+            return $0.dueDate == Date.now
         }
         
-        scheduledTodos = Array(totalTodos).filter {
-            if let dueDate = $0.dueDate {
-                return dueDate > currentDate
-            } else {
-                return false
-            }
+        scheduledTodos = totalTodos.where {
+            return $0.dueDate > currentDate
+        }
+        
+        flagedTodos = totalTodos.where {
+            $0.flaged == true
+        }
+        
+        completedTodos = totalTodos.where {
+            $0.completed == true
         }
         
         baseView.collectionView.reloadData()
@@ -157,14 +157,32 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let category = categories[indexPath.row]
         
-        let listViewController = ListViewController(
-            baseView: ListView(),
-            category: category
-        )
+        var todos: Results<Todo>?
         
-        listViewController.delegate = self
+        switch category {
+        case .total:
+            todos = totalTodos
+        case .today:
+            todos = todayTodos
+        case .scheduled:
+            todos = scheduledTodos
+        case .flaged:
+            todos = flagedTodos
+        case .completed:
+            todos = completedTodos
+        }
         
-        NavigationManager.shared.pushVC(listViewController)
+        if let todos = todos {
+            let listViewController = ListViewController(
+                baseView: ListView(),
+                category: category,
+                todos: todos
+            )
+            
+            listViewController.delegate = self
+            
+            NavigationManager.shared.pushVC(listViewController)
+        }
     }
 }
 
@@ -176,9 +194,8 @@ extension MainViewController: RegisterViewControllerDelegate {
 }
 
 extension MainViewController: ListViewControllerDelegate {
-    func deleteButtonTapped() {
+    func itemUpdated() {
         reloadData()
-        baseView.collectionView.reloadData()
     }
 }
 
@@ -190,5 +207,5 @@ extension MainViewController: CalendarAlertViewControllerDelegate {
 }
 
 protocol ListViewControllerDelegate: AnyObject {
-    func deleteButtonTapped()
+    func itemUpdated()
 }

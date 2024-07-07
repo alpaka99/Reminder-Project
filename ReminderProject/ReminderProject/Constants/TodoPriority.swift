@@ -51,4 +51,15 @@ enum TodoPriority: Int, CaseIterable {
             return "Low🟣"
         }
     }
+    
+    var emoji: String {
+        switch self {
+        case .high:
+            return "🔴"
+        case .medium:
+            return "🟡"
+        case .low:
+            return "🟣"
+        }
+    }
 }

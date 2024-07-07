@@ -50,6 +50,7 @@
 		CED1E1292C3840CE004BFBE1 /* CalendarAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1282C3840CE004BFBE1 /* CalendarAlertView.swift */; };
 		CED1E12B2C392962004BFBE1 /* TodoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E12A2C392962004BFBE1 /* TodoPriority.swift */; };
 		CED1E12F2C398C42004BFBE1 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E12E2C398C42004BFBE1 /* FileManager+Extension.swift */; };
+		CED1E1312C3A9882004BFBE1 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1302C3A9882004BFBE1 /* Bool+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		CED1E1282C3840CE004BFBE1 /* CalendarAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAlertView.swift; sourceTree = "<group>"; };
 		CED1E12A2C392962004BFBE1 /* TodoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPriority.swift; sourceTree = "<group>"; };
 		CED1E12E2C398C42004BFBE1 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		CED1E1302C3A9882004BFBE1 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				CED1E1212C36D6CA004BFBE1 /* UIColor+Extension.swift */,
 				CED1E1232C36D6FC004BFBE1 /* String+Extension.swift */,
 				CED1E12E2C398C42004BFBE1 /* FileManager+Extension.swift */,
+				CED1E1302C3A9882004BFBE1 /* Bool+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */,
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
+				CED1E1312C3A9882004BFBE1 /* Bool+Extension.swift in Sources */,
 				CED1E0B92C345386004BFBE1 /* ListViewController.swift in Sources */,
 				CED1E0D32C35B125004BFBE1 /* DetailInputViewController.swift in Sources */,
 				CED1E0AC2C341555004BFBE1 /* RegisterViewController.swift in Sources */,

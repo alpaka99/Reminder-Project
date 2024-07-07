@@ -8,12 +8,20 @@
 import UIKit
 
 final class ListTableViewCell: BaseTableViewCell {
-    private let toggleButton = UIButton()
+    private(set) var toggleButton = UIButton()
     private let priority = UILabel()
     private let title = UILabel()
     private let content = UILabel()
     private let dateLabel = UILabel()
     private let tagLabel = UILabel()
+    private var attributedContainer = {
+        var container = AttributeContainer()
+        
+        container.strikethroughStyle = .none
+        container.font = .systemFont(ofSize: 16, weight: .semibold)
+        
+        return container
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
@@ -79,13 +87,12 @@ final class ListTableViewCell: BaseTableViewCell {
         
         self.backgroundColor = .clear
         
-        toggleButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: "circle")
+        toggleButton.configuration = config
         
         priority.font = .systemFont(ofSize: 16, weight: .semibold)
         priority.textColor = .white
-        
-        title.font = .systemFont(ofSize: 16, weight: .semibold)
-        title.textColor = .white
         
         
         content.font = .systemFont(ofSize: 12, weight: .medium)
@@ -100,11 +107,43 @@ final class ListTableViewCell: BaseTableViewCell {
         tagLabel.textColor = .systemBlue
     }
     
-    func configureData(_ data: Todo) {
-        title.text = data.title
+    internal func configureData(_ data: Todo) {
         content.text = data.content
         dateLabel.text = DateHelper.shared.string(from: data.dueDate)
-        priority.text = String(data.priority ?? -1)
+        if let priorityInt = data.priority, let priorityEmoji = TodoPriority.init(rawValue: priorityInt)?.emoji {
+            priority.text = priorityEmoji
+        }
         tagLabel.text = data.tag
+        
+        setToggleButton(data)
+        setAttributeText(data)
+    }
+    
+    private func setToggleButton(_ data: Todo) {
+        guard var config = toggleButton.configuration else { return }
+        if data.completed {
+            config.image = UIImage(systemName: "checkmark.circle.fill")
+            toggleButton.configuration = config
+        } else {
+            config.image = UIImage(systemName: "circle")
+            toggleButton.configuration = config
+        }
+    }
+    
+    private func setAttributeText(_ data: Todo) {
+        let attributeString = NSMutableAttributedString(string: data.title)
+        attributeString.addAttribute(.foregroundColor, value: UIColor.white, range: NSMakeRange(0, attributeString.length))
+        
+        if data.completed {
+            attributeString.addAttribute(
+                .strikethroughStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(
+                    0,
+                    attributeString.length
+                ))
+        }
+        
+        title.attributedText = attributeString
     }
 }

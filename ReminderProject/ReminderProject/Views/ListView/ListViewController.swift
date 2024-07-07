@@ -18,15 +18,13 @@ final class ListViewController: BaseViewController<ListView> {
     )
     
     private var category: TodoCategory
-    private lazy var results = RealmManager.shared.readAll(Todo.self)
-        .where {
-            $0.tag == category.title
-        }
+    private var todos: Results<Todo>
     
     weak var delegate: ListViewControllerDelegate?
     
-    init(baseView: ListView, category: TodoCategory) {
+    init(baseView: ListView, category: TodoCategory, todos: Results<Todo>) {
         self.category = category
+        self.todos = todos
         super.init(baseView: baseView)
     }
     
@@ -55,14 +53,14 @@ final class ListViewController: BaseViewController<ListView> {
             preferredStyle: .actionSheet
         )
         let dueDateSort = UIAlertAction(
-            title: "카테고리 순",
+            title: "우선순위 순",
             style: .default
         ) {[weak self] _ in
-            if let results = self?.results.sorted(
-                byKeyPath: "category",
+            if let todos = self?.todos.sorted(
+                byKeyPath: "priority",
                 ascending: true
             ) {
-                self?.results = results
+                self?.todos = todos
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -70,11 +68,11 @@ final class ListViewController: BaseViewController<ListView> {
             title: "이름 순",
             style: .default
         ) { [weak self] _ in
-            if let results = self?.results.sorted(
+            if let todos = self?.todos.sorted(
                 byKeyPath: "title",
                 ascending: true
             ) {
-                self?.results = results
+                self?.todos = todos
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -82,11 +80,11 @@ final class ListViewController: BaseViewController<ListView> {
             title: "마감일 순",
             style: .default
         ) { [weak self] _ in
-            if let results = self?.results.sorted(
+            if let todos = self?.todos.sorted(
                 byKeyPath: "dueDate",
                 ascending: true
             ) {
-                self?.results = results
+                self?.todos = todos
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -97,23 +95,45 @@ final class ListViewController: BaseViewController<ListView> {
         
         NavigationManager.shared.presentVC(ac, animated: true)
     }
+    
+    @objc
+    func toggleButtonTapped(_ sender: UIButton) {
+        let target = todos[sender.tag]
+        
+        RealmManager.shared.toggleCompleted(of: target)
+        
+        baseView.tableView.reloadRows(
+            at: [IndexPath(
+                row: sender.tag,
+                section: 0
+            )],
+            with: .automatic
+        )
+        
+        delegate?.itemUpdated()
+    }
 }
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return todos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
-        let data = results[indexPath.row]
+        
+        let data = todos[indexPath.row]
+        
+        cell.toggleButton.tag = indexPath.row
+        cell.toggleButton.addTarget(self, action: #selector(toggleButtonTapped), for: .touchUpInside)
         cell.configureData(data)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let data = results[indexPath.row]
+        let data = todos[indexPath.row]
         
         NavigationManager.shared.pushVC(DetailTodoViewController(baseView: DetailTodoView(todo: data)))
     }
@@ -123,17 +143,28 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let target = results[indexPath.row]
+        
+        let target = todos[indexPath.row]
+        
+        let flagedAction = UIContextualAction(style: .normal, title: "깃발") { [weak self] _, _, _ in
+            RealmManager.shared.toggleFlaged(of: target)
+            self?.delegate?.itemUpdated()
+            UIView.animate(withDuration: 0.2) {
+                tableView.reloadData()
+            }
+        }
         
         let deleteAction = UIContextualAction(
             style: .destructive,
             title: "삭제"
         ) { [weak self] _, _, _ in
             RealmManager.shared.delete(target)
-            tableView.reloadData()
-            self?.delegate?.deleteButtonTapped()
+            self?.delegate?.itemUpdated()
+            UIView.animate(withDuration: 0.2) {
+                tableView.reloadData()
+            }
         }
         
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction, flagedAction])
     }
 }
