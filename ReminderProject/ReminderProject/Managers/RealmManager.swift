@@ -57,7 +57,7 @@ final class RealmManager {
         }
     }
     
-    internal func updateFlaged<T: Todo>(from oldValue: T) {
+    internal func toggleFlaged<T: Todo>(of oldValue: T) {
         do {
             let target = realm.object(
                 ofType: T.self,
@@ -70,6 +70,23 @@ final class RealmManager {
             }
         } catch {
             print("FlagValue Update Error")
+            print(error.localizedDescription)
+        }
+    }
+    
+    internal func toggleCompleted<T: Todo>(of oldValue: T) {
+        do {
+            let target = realm.object(
+                ofType: T.self,
+                forPrimaryKey: oldValue._id
+            )
+            guard let target = target else { return }
+            
+            try realm.write {
+                target.setValue(target.completed.toggled(), forKey: "completed")
+            }
+        } catch {
+            print("Completed Update Error")
             print(error.localizedDescription)
         }
     }

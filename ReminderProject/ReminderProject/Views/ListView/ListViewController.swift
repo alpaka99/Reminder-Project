@@ -95,6 +95,21 @@ final class ListViewController: BaseViewController<ListView> {
         
         NavigationManager.shared.presentVC(ac, animated: true)
     }
+    
+    @objc
+    func toggleButtonTapped(_ sender: UIButton) {
+        let target = todos[sender.tag]
+        
+        RealmManager.shared.toggleCompleted(of: target)
+        
+        baseView.tableView.reloadRows(
+            at: [IndexPath(
+                row: sender.tag,
+                section: 0
+            )],
+            with: .automatic
+        )
+    }
 }
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -104,8 +119,13 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
+        
         let data = todos[indexPath.row]
+        
+        cell.toggleButton.tag = indexPath.row
+        cell.toggleButton.addTarget(self, action: #selector(toggleButtonTapped), for: .touchUpInside)
         cell.configureData(data)
+        
         return cell
     }
     
@@ -125,7 +145,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let target = todos[indexPath.row]
         
         let flagedAction = UIContextualAction(style: .normal, title: "깃발") { [weak self] _, _, _ in
-            RealmManager.shared.updateFlaged(from: target)
+            RealmManager.shared.toggleFlaged(of: target)
             self?.delegate?.itemUpdated()
             UIView.animate(withDuration: 0.3) {
                 tableView.reloadData()

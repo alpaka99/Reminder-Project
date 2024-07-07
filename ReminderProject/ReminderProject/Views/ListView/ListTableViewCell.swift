@@ -8,7 +8,7 @@
 import UIKit
 
 final class ListTableViewCell: BaseTableViewCell {
-    private let toggleButton = UIButton()
+    private(set) var toggleButton = UIButton()
     private let priority = UILabel()
     private let title = UILabel()
     private let content = UILabel()
