@@ -13,24 +13,26 @@ import RealmSwift
 final class MainViewController: BaseViewController<MainView> {
     private var categories = TodoCategory.allCases
     private var currentDate = Date.now
-    private var totalTodos: Results<Todo> = RealmManager.shared.readAll(Todo.self)
+    private var totalTodos = Array(RealmManager.shared.readAll(Todo.self))
     private var userCategories: Results<Category> = RealmManager.shared.readAll(Category.self)
     // https://stackoverflow.com/questions/35964884/how-do-i-filter-events-created-for-the-current-date-in-the-realm-swift/35965216#35965216
-    private lazy var todayTodos = totalTodos.where {
-        let start = Calendar.current.startOfDay(for: currentDate)
-        if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
-            return $0.dueDate >= start && $0.dueDate < end
+    private lazy var todayTodos = Array(totalTodos).filter {
+        if let dueDate = $0.dueDate {
+            return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
         }
-        return $0.dueDate == Date.now
+        return false
     }
-    private lazy var scheduledTodos = totalTodos.where {
-            return $0.dueDate > currentDate
+    private lazy var scheduledTodos = Array(totalTodos).filter {
+        if let dueDate = $0.dueDate {
+            return dueDate > currentDate
         }
+        return false
+    }
     
-    private lazy var flagedTodos: Results<Todo> = totalTodos.where {
+    private lazy var flagedTodos = Array(totalTodos).filter {
         $0.flaged == true
     }
-    private lazy var completedTodos: Results<Todo> = totalTodos.where {
+    private lazy var completedTodos = Array(totalTodos).filter {
         $0.completed == true
     }
     
@@ -78,23 +80,26 @@ final class MainViewController: BaseViewController<MainView> {
     func reloadData() {
         baseView.titleLabel.text = DateHelper.shared.string(from: currentDate)
         
-        todayTodos = totalTodos.where {
-            let start = Calendar.current.startOfDay(for: currentDate)
-            if let end = Calendar.current.date(byAdding: .day, value: 1, to: start) {
-                return $0.dueDate >= start && $0.dueDate < end
+        totalTodos = Array(RealmManager.shared.readAll(Todo.self))
+        
+        todayTodos = Array(totalTodos).filter {
+            if let dueDate = $0.dueDate {
+                return Calendar.current.isDate(dueDate, inSameDayAs: currentDate)
             }
-            return $0.dueDate == Date.now
+            return false
         }
         
-        scheduledTodos = totalTodos.where {
-            return $0.dueDate > currentDate
+        scheduledTodos = Array(totalTodos).filter {
+            if let dueDate = $0.dueDate {
+                return dueDate > currentDate
+            }
+            return false
         }
         
-        flagedTodos = totalTodos.where {
+        flagedTodos = Array(totalTodos).filter {
             $0.flaged == true
         }
-        
-        completedTodos = totalTodos.where {
+        completedTodos = Array(totalTodos).filter {
             $0.completed == true
         }
         
@@ -226,6 +231,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.icon.image = UIImage(systemName: type.iconName)
             cell.iconBackground.backgroundColor = UIColor.hexToColor(type.backgroundColor)
             
+            let count = type.todos.count
+            cell.number.text = String(count)
+            
             return cell
         } else {
             return cell
@@ -239,7 +247,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let category = categories[indexPath.row]
             
-            var todos: Results<Todo>?
+            var todos: Array<Todo> = []
             
             switch category {
             case .total:
@@ -254,29 +262,30 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 todos = completedTodos
             }
             
-            if let todos = todos {
+            
                 let listViewController = ListViewController(
                     baseView: ListView(),
-                    category: category,
+                    categoryTitle: category.title,
                     todos: todos
                 )
                 
                 listViewController.delegate = self
                 
                 NavigationManager.shared.pushVC(listViewController)
-            }
-        } else if indexPath.section == 1 {
-//            let todos = userCategories[indexPath.row].todos
             
-//            let listViewController = ListViewController(
-//                baseView: ListView(),
-//                category: category,
-//                todos: todos
-//            )
-//            
-//            listViewController.delegate = self
-//            
-//            NavigationManager.shared.pushVC(listViewController)
+        } else if indexPath.section == 1 {
+            let category = userCategories[indexPath.row]
+            let todos = Array(category.todos)
+            
+            let listViewController = ListViewController(
+                baseView: ListView(),
+                categoryTitle: category.categoryName,
+                todos: todos
+            )
+            
+            listViewController.delegate = self
+            
+            NavigationManager.shared.pushVC(listViewController)
             
         }
     }
