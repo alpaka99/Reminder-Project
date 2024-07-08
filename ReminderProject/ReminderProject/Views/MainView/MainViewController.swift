@@ -70,6 +70,8 @@ final class MainViewController: BaseViewController<MainView> {
             action: #selector(newTodoButtonTapped),
             for: .touchUpInside
         )
+        
+        baseView.addListButton.addTarget(self, action: #selector(addListButtonTapped), for: .touchUpInside)
     }
     
     func reloadData() {
@@ -108,7 +110,8 @@ final class MainViewController: BaseViewController<MainView> {
         NavigationManager.shared.presentVC(calendarAlertViewController, animated: true)
     }
     
-    @objc func rightBarButtonTapped() {
+    @objc 
+    func rightBarButtonTapped() {
         
     }
     
@@ -121,6 +124,51 @@ final class MainViewController: BaseViewController<MainView> {
         
         let navigationController = UINavigationController(rootViewController: registerViewController)
         NavigationManager.shared.presentVC(navigationController)
+    }
+    
+    @objc
+    func addListButtonTapped(_ sender: UIButton) {
+        let ac = UIAlertController(
+            title: "새로운 카테고리",
+            message: "여러분만의 카테고리를 만들어주세요",
+            preferredStyle: .alert
+        )
+        ac.addTextField { [weak self] textField in
+            textField.placeholder = "카테고리 이름을 입력해주세요"
+            textField.addTarget(
+                self,
+                action: #selector(self?.textFieldSubmitted),
+                for: .editingDidEndOnExit
+            )
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: .cancel
+        ) { _ in
+            print("cancel")
+        }
+        ac.addAction(cancelAction)
+        
+        let conformAction = UIAlertAction(
+            title: "확인",
+            style: .default
+        ) { [weak self] _ in
+            if let textField = ac.textFields?.first {
+                self?.textFieldSubmitted(textField)
+            }
+            print("conform")
+        }
+        ac.addAction(conformAction)
+        
+        
+        present(ac, animated: true)
+    }
+    
+    @objc
+    func textFieldSubmitted(_ sender: UITextField) {
+        
+        
     }
 }
 
