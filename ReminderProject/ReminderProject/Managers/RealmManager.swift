@@ -101,4 +101,40 @@ final class RealmManager {
             print(error.localizedDescription)
         }
     }
+    
+    internal func addTodoToCategory(_ target: Todo, to category: Category) {
+        
+        
+        deleteTodoFromCategory(target)
+        
+        do {
+            try realm.write {
+                category.todos.append(target)
+            }
+        } catch {
+            print("Category set error")
+            print(error.localizedDescription)
+        }
+    }
+    
+    internal func deleteTodoFromCategory(_ target: Todo) {
+        
+            let categories = target.category
+            
+        categories.forEach { cat in
+            do {
+                try realm.write {
+                    for index in 0..<cat.todos.count {
+                        if target._id == cat.todos[index]._id {
+                            cat.todos.remove(at: index)
+                            return
+                        }
+                    }
+                }
+            } catch {
+                print("Deletion Error")
+                print(error)
+            }
+        }
+    }
 }

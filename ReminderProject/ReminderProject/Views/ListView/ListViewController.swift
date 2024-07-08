@@ -19,6 +19,7 @@ final class ListViewController: BaseViewController<ListView> {
     
     private var category: TodoCategory
     private var todos: Results<Todo>
+    private var userCategories = RealmManager.shared.readAll(Category.self)
     
     weak var delegate: ListViewControllerDelegate?
     
@@ -166,5 +167,25 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction, flagedAction])
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let target = todos[indexPath.row]
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { [weak self] _ in
+            
+            var actions: [UIAction] = []
+            
+            self?.userCategories.forEach { userCategory in
+                let action = UIAction(title: userCategory.categoryName) {_ in
+                    RealmManager.shared.addTodoToCategory(target, to: userCategory)
+                }
+                
+                actions.append(action)
+            }
+            
+            return UIMenu(title: "해당 카테고리로 이동", children: actions)
+        })
     }
 }
