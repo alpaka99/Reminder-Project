@@ -11,7 +11,11 @@ final class Observable<T> {
     
     var closure: ((T) -> Void)?
     
-    var value: T
+    var value: T {
+        didSet {
+            closure?(value)
+        }
+    }
     
     init(_ value: T) {
         self.value = value

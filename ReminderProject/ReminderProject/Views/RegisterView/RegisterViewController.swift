@@ -9,7 +9,8 @@ import PhotosUI
 import UIKit
 
 final class RegisterViewController: BaseViewController<RegisterView> {
-    private let registerFieldTypes: [RegisterFieldType] = RegisterFieldType.allCases
+    
+    let viewModel = RegisterViewModel()
     
     weak var delegate: RegisterViewControllerDelegate?
     
@@ -33,6 +34,12 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         barButton.isEnabled = false
         return barButton
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bindData()
+    }
     
     override func configureUI() {
         super.configureUI()
@@ -78,119 +85,139 @@ final class RegisterViewController: BaseViewController<RegisterView> {
         )
     }
     
+    func bindData() {
+        viewModel.inputDate.bind { [weak self] value in
+            self?.baseView.dueDateTextField.content.text = value
+        }
+        
+        viewModel.inputTag.bind { [weak self] value in
+            self?.baseView.tagTextField.content.text = value
+        }
+        
+        viewModel.inputPriority.bind { [weak self] value in
+            self?.baseView.priorityTextField.content.text = value
+        }
+        
+        viewModel.inputImage.bind { [weak self] value in
+            if let value = value, let image = UIImage(data: value) {
+                self?.baseView.imageTextField.thumbnailImage.image = image
+            }
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        viewModel.addButtonTapped.bind {[weak self] _ in
+            guard let title = self?.viewModel.inputTitle.value else { return }
+            
+            let inputDate = self?.viewModel.inputDate.value ?? ""
+            let dueDate = DateHelper.shared.date(from: inputDate)
+            
+            let unConvertedPriority = self?.viewModel.inputPriority.value ?? ""
+            let priority = TodoPriority.stringInit(rawString: unConvertedPriority)
+            
+            let newTodo = Todo(
+                title: title,
+                content: self?.viewModel.inputContent.value,
+                dueDate: dueDate,
+                tag: self?.viewModel.inputTag.value,
+                priority: priority?.rawValue
+            )
+            
+            RealmManager.shared.create(newTodo)
+            
+            if let data = self?.viewModel.inputImage.value, let image = UIImage(data: data) {
+                self?.saveImageToDocument(image: image, fileName: newTodo._id.stringValue)
+            }
+            
+            self?.delegate?.saveButtonTapped()
+            
+            NavigationManager.shared.dismiss(animated: true)
+        }
+        
+        viewModel.inputTitle.bind { [weak self] value in
+            print(value)
+            self?.rightBarButton.isEnabled = !value.isEmpty
+        }
+        
+        viewModel.inputDetailInputType.bind { [weak self] value in
+            
+            switch value {
+            case .dueDate, .tag, .priority:
+                let vc = DetailInputViewController(baseView: DetailInputView())
+                
+                vc.configureData(value)
+                vc.delegate = self
+                
+                self?.navigationController?.pushViewController(vc, animated: true)
+            case .image:
+                var config = PHPickerConfiguration()
+                config.selectionLimit = 30
+                config.mode = .default
+                
+                let photoPicker = PHPickerViewController(configuration: config)
+                
+                photoPicker.delegate = self
+                
+                self?.navigationController?.pushViewController(photoPicker, animated: true)
+            }
+        }
+        
+        viewModel.inputCancelButtonTapped.bind { _ in
+            NavigationManager.shared.dismiss(animated: true)
+        }
+    }
+    
     @objc
     func textFieldTextChanged(_ sender: UITextField) {
-        if let text = sender.text, !text.isEmpty {
-            rightBarButton.isEnabled = true
-        } else {
-            rightBarButton.isEnabled = false
+        if let text = sender.text {
+            viewModel.inputTitle.value = text
         }
     }
     
     @objc
     func dueDateTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        let vc = DetailInputViewController(baseView: DetailInputView())
-        
-        vc.configureData(.dueDate)
-        vc.delegate = self
-        
-        navigationController?.pushViewController(vc, animated: true)
-        
-        // MARK: present된 vc에서는 navigationManager를 이용한 push가 안됨
-//        NavigationManager.shared.pushVC(vc, animated: true)
+        viewModel.inputDetailInputType.value = .dueDate
     }
     
     @objc
     func tagTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        let vc = DetailInputViewController(baseView: DetailInputView())
-        
-        vc.configureData(.tag)
-        vc.delegate = self
-        
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel.inputDetailInputType.value = .tag
     }
     
     @objc
     func priorityTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        let vc = DetailInputViewController(baseView: DetailInputView())
-        
-        vc.configureData(.priority)
-        vc.delegate = self
-        
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel.inputDetailInputType.value = .priority
     }
     
     @objc
     func imageTextFieldTrailingButtonTapped(_ sender: UIButton) {
-        var config = PHPickerConfiguration()
-        config.selectionLimit = 30
-        config.mode = .default
-        
-        let photoPicker = PHPickerViewController(configuration: config)
-        
-        photoPicker.delegate = self
-        
-        navigationController?.pushViewController(photoPicker, animated: true)
+        viewModel.inputDetailInputType.value = .image
     }
     
     @objc
     func cancelButtonTapped() {
-        NavigationManager.shared.dismiss(animated: true)
+        viewModel.inputCancelButtonTapped.value = ()
     }
     
     // MARK: Fetch TextField from baseView
     @objc
     func addButtonTapped() {
-        guard let  title = baseView.memoView.textField.text else {
-            return
-        }
-        
-        let content = baseView.memoView.textView.text
-        
-        let unFormattedDueDate = baseView.dueDateTextField.content.text ?? ""
-        let dueDate = DateHelper.shared.date(from: unFormattedDueDate)
-        
-        let tag = baseView.tagTextField.content.text
-        
-        let unConvertedPriority = baseView.priorityTextField.content.text ?? ""
-        let priority = TodoPriority.stringInit(rawString: unConvertedPriority)?.rawValue
-        
-        let newTodo = Todo(
-            title: title,
-            content: content,
-            dueDate: dueDate,
-            tag: tag,
-            priority: priority
-        )
-        
-        RealmManager.shared.create(newTodo)
-        
-        if let image = baseView.imageTextField.thumbnailImage.image {
-            // save image method
-            saveImageToDocument(image: image, fileName: newTodo._id.stringValue)
-        }
-        
-        delegate?.saveButtonTapped()
-        
-        NavigationManager.shared.dismiss(animated: true)
+        viewModel.addButtonTapped.value = ()
     }
 }
 
 extension RegisterViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
-    }
+    
 }
 
 extension RegisterViewController: DetailInputViewControllerDelegate {
     func sendDetailData(_ type: RegisterFieldType, text: String) {
         switch type {
         case .dueDate:
-            baseView.dueDateTextField.content.text = text
+            viewModel.inputDate.value = text
         case .tag:
-            baseView.tagTextField.content.text = text
+            viewModel.inputTag.value = text
         case .priority:
-            baseView.priorityTextField.content.text = text
+            viewModel.inputPriority.value = text
         default:
             break
         }
@@ -204,14 +231,11 @@ extension RegisterViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, error in
                 if let image = image as? UIImage {
                     DispatchQueue.main.async {
-                        self?.baseView.imageTextField.thumbnailImage.image = image
+                        self?.viewModel.inputImage.value = image.jpegData(compressionQuality: 0.5)
                     }
                 }
             }
         }
-        
-        
-        navigationController?.popViewController(animated: true)
     }
 }
 
