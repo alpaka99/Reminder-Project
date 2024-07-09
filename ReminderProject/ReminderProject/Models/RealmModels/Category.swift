@@ -12,8 +12,13 @@ final class Category: Object {
     @Persisted(primaryKey: true) var categoryName: String
     @Persisted var iconName: String
     @Persisted var backgroundColor: String
+    @Persisted var todos: List<Todo>
     
-    convenience init(categoryName: String, iconName: String, backgroundColor: String) {
+    convenience init(
+        categoryName: String,
+        iconName: String,
+        backgroundColor: String
+    ) {
         self.init()
         
         self.categoryName = categoryName

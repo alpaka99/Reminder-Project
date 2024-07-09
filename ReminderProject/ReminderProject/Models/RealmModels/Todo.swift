@@ -21,6 +21,8 @@ final class Todo: Object {
     @Persisted var flaged: Bool = false
     @Persisted var completed: Bool = false
     
+    @Persisted(originProperty: "todos") var category: LinkingObjects<Category>
+    
     convenience init(
         title: String,
         content: String? = nil,

@@ -51,6 +51,9 @@
 		CED1E12B2C392962004BFBE1 /* TodoPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E12A2C392962004BFBE1 /* TodoPriority.swift */; };
 		CED1E12F2C398C42004BFBE1 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E12E2C398C42004BFBE1 /* FileManager+Extension.swift */; };
 		CED1E1312C3A9882004BFBE1 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1302C3A9882004BFBE1 /* Bool+Extension.swift */; };
+		CED1E13B2C3CB7EF004BFBE1 /* TodoSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13A2C3CB7EF004BFBE1 /* TodoSearchView.swift */; };
+		CED1E13D2C3CB806004BFBE1 /* TodoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13C2C3CB806004BFBE1 /* TodoSearchViewController.swift */; };
+		CED1E13F2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13E2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,9 @@
 		CED1E12A2C392962004BFBE1 /* TodoPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoPriority.swift; sourceTree = "<group>"; };
 		CED1E12E2C398C42004BFBE1 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		CED1E1302C3A9882004BFBE1 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
+		CED1E13A2C3CB7EF004BFBE1 /* TodoSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchView.swift; sourceTree = "<group>"; };
+		CED1E13C2C3CB806004BFBE1 /* TodoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchViewController.swift; sourceTree = "<group>"; };
+		CED1E13E2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 		CED1E0952C33FA88004BFBE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CED1E1392C3CB7A0004BFBE1 /* TodoSearchView */,
 				CED1E1252C384095004BFBE1 /* CalendarAlertView */,
 				CED1E0D92C360B89004BFBE1 /* DetailTodoView */,
 				CED1E0D42C35B13E004BFBE1 /* DetailInputView */,
@@ -291,6 +298,16 @@
 			path = CalendarAlertView;
 			sourceTree = "<group>";
 		};
+		CED1E1392C3CB7A0004BFBE1 /* TodoSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				CED1E13A2C3CB7EF004BFBE1 /* TodoSearchView.swift */,
+				CED1E13C2C3CB806004BFBE1 /* TodoSearchViewController.swift */,
+				CED1E13E2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift */,
+			);
+			path = TodoSearchView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -388,8 +405,10 @@
 				CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */,
 				CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */,
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
+				CED1E13D2C3CB806004BFBE1 /* TodoSearchViewController.swift in Sources */,
 				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
 				CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */,
+				CED1E13F2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift in Sources */,
 				CED1E0C62C348920004BFBE1 /* Todo.swift in Sources */,
 				CED1E0D82C35C851004BFBE1 /* DateHelper.swift in Sources */,
 				CED1E0922C33F056004BFBE1 /* BaseView.swift in Sources */,
@@ -400,6 +419,7 @@
 				CED1E0CD2C356203004BFBE1 /* NSObject+Extension.swift in Sources */,
 				CED1E09D2C33FEF9004BFBE1 /* Constants.swift in Sources */,
 				CED1E0732C33E79C004BFBE1 /* AppDelegate.swift in Sources */,
+				CED1E13B2C3CB7EF004BFBE1 /* TodoSearchView.swift in Sources */,
 				CED1E1312C3A9882004BFBE1 /* Bool+Extension.swift in Sources */,
 				CED1E0B92C345386004BFBE1 /* ListViewController.swift in Sources */,
 				CED1E0D32C35B125004BFBE1 /* DetailInputViewController.swift in Sources */,

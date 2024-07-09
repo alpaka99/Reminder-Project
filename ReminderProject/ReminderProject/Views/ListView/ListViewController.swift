@@ -17,13 +17,14 @@ final class ListViewController: BaseViewController<ListView> {
         action: #selector(rightBarButtonTapped)
     )
     
-    private var category: TodoCategory
-    private var todos: Results<Todo>
+    private var categoryTitle: String
+    private var todos: [Todo]
+    private var userCategories = RealmManager.shared.readAll(Category.self)
     
     weak var delegate: ListViewControllerDelegate?
     
-    init(baseView: ListView, category: TodoCategory, todos: Results<Todo>) {
-        self.category = category
+    init(baseView: ListView, categoryTitle: String, todos: [Todo]) {
+        self.categoryTitle = categoryTitle
         self.todos = todos
         super.init(baseView: baseView)
     }
@@ -32,7 +33,7 @@ final class ListViewController: BaseViewController<ListView> {
         super.configureUI()
         
         navigationItem.rightBarButtonItem = rightBarbutton
-        baseView.configureData(category)
+        baseView.configureData(categoryTitle)
     }
     
     override func configureDelegate() {
@@ -56,11 +57,8 @@ final class ListViewController: BaseViewController<ListView> {
             title: "우선순위 순",
             style: .default
         ) {[weak self] _ in
-            if let todos = self?.todos.sorted(
-                byKeyPath: "priority",
-                ascending: true
-            ) {
-                self?.todos = todos
+            if let todos = self?.todos {
+                self?.todos = todos.sorted(by: {$0.priority ?? 0 < $1.priority ?? 0})
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -68,11 +66,8 @@ final class ListViewController: BaseViewController<ListView> {
             title: "이름 순",
             style: .default
         ) { [weak self] _ in
-            if let todos = self?.todos.sorted(
-                byKeyPath: "title",
-                ascending: true
-            ) {
-                self?.todos = todos
+            if let todos = self?.todos {
+                self?.todos = todos.sorted(by: { $0.title < $1.title })
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -80,11 +75,8 @@ final class ListViewController: BaseViewController<ListView> {
             title: "마감일 순",
             style: .default
         ) { [weak self] _ in
-            if let todos = self?.todos.sorted(
-                byKeyPath: "dueDate",
-                ascending: true
-            ) {
-                self?.todos = todos
+            if let todos = self?.todos {
+                self?.todos = todos.sorted(by: { $0.dueDate ?? Date() < $1.dueDate ?? Date()})
                 self?.baseView.tableView.reloadData()
             }
         }
@@ -166,5 +158,31 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction, flagedAction])
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let target = todos[indexPath.row]
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { [weak self] _ in
+            
+            var actions: [UIAction] = []
+            
+            self?.userCategories.forEach { userCategory in
+                let action = UIAction(title: userCategory.categoryName) {_ in
+                    RealmManager.shared.addTodoToCategory(target, to: userCategory)
+                    
+                    UIView.animate(withDuration: 0.2) {
+                        
+                        tableView.reloadData()
+                        self?.delegate?.itemUpdated()
+                    }
+                }
+                
+                actions.append(action)
+            }
+            
+            return UIMenu(title: "해당 카테고리로 분류", children: actions)
+        })
     }
 }
