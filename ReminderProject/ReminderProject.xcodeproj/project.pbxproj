@@ -54,6 +54,8 @@
 		CED1E13B2C3CB7EF004BFBE1 /* TodoSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13A2C3CB7EF004BFBE1 /* TodoSearchView.swift */; };
 		CED1E13D2C3CB806004BFBE1 /* TodoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13C2C3CB806004BFBE1 /* TodoSearchViewController.swift */; };
 		CED1E13F2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E13E2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift */; };
+		CED1E1592C3DA8C1004BFBE1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1582C3DA8C1004BFBE1 /* Observable.swift */; };
+		CED1E1812C3DCC9A004BFBE1 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED1E1802C3DCC9A004BFBE1 /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		CED1E13A2C3CB7EF004BFBE1 /* TodoSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchView.swift; sourceTree = "<group>"; };
 		CED1E13C2C3CB806004BFBE1 /* TodoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchViewController.swift; sourceTree = "<group>"; };
 		CED1E13E2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSearchTableViewCell.swift; sourceTree = "<group>"; };
+		CED1E1582C3DA8C1004BFBE1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		CED1E1802C3DCC9A004BFBE1 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 				CED1E0912C33F056004BFBE1 /* BaseView.swift */,
 				CED1E0A02C3405A9004BFBE1 /* BaseCollectionViewCell.swift */,
 				CED1E0B32C341ED3004BFBE1 /* BaseTableViewCell.swift */,
+				CED1E1582C3DA8C1004BFBE1 /* Observable.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				CED1E0AD2C34156B004BFBE1 /* RegisterView.swift */,
 				CED1E0AF2C341CDC004BFBE1 /* RegisterDisclosureCell.swift */,
 				CED1E0B52C342DD1004BFBE1 /* RegisterOpenedCell.swift */,
+				CED1E1802C3DCC9A004BFBE1 /* RegisterViewModel.swift */,
 			);
 			path = RegisterView;
 			sourceTree = "<group>";
@@ -402,11 +408,13 @@
 				CED1E0A12C3405A9004BFBE1 /* BaseCollectionViewCell.swift in Sources */,
 				CED1E0AE2C34156B004BFBE1 /* RegisterView.swift in Sources */,
 				CED1E0902C33EFE5004BFBE1 /* BaseViewController.swift in Sources */,
+				CED1E1812C3DCC9A004BFBE1 /* RegisterViewModel.swift in Sources */,
 				CED1E0C82C3497E2004BFBE1 /* ViewController+Extension.swift in Sources */,
 				CED1E0CF2C359FFC004BFBE1 /* Category.swift in Sources */,
 				CED1E0A42C3408D0004BFBE1 /* Reusable.swift in Sources */,
 				CED1E13D2C3CB806004BFBE1 /* TodoSearchViewController.swift in Sources */,
 				CED1E0B62C342DD1004BFBE1 /* RegisterOpenedCell.swift in Sources */,
+				CED1E1592C3DA8C1004BFBE1 /* Observable.swift in Sources */,
 				CED1E0BD2C34596B004BFBE1 /* ListTableViewCell.swift in Sources */,
 				CED1E13F2C3CBB76004BFBE1 /* TodoSearchTableViewCell.swift in Sources */,
 				CED1E0C62C348920004BFBE1 /* Todo.swift in Sources */,

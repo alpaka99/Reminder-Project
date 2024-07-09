@@ -17,7 +17,6 @@ final class DetailInputViewController: BaseViewController<DetailInputView> {
         
         guard let type = type else { return }
         
-        
         let detailData = baseView.sendDetailData()
         
         delegate?.sendDetailData(type, text: detailData)
