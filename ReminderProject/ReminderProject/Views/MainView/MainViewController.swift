@@ -44,7 +44,7 @@ final class MainViewController: BaseViewController<MainView> {
     )
     
     private lazy var rightBarbutton = UIBarButtonItem(
-        image: UIImage(systemName: "ellipsis.circle"),
+        image: UIImage(systemName: "list.bullet"),
         style: .plain,
         target: self,
         action: #selector(rightBarButtonTapped)
@@ -118,7 +118,9 @@ final class MainViewController: BaseViewController<MainView> {
     
     @objc 
     func rightBarButtonTapped() {
+        let todoSearchViewController = TodoSearchViewController(baseView: TodoSearchView())
         
+        NavigationManager.shared.presentVC(todoSearchViewController, animated: true)
     }
     
     
@@ -129,7 +131,7 @@ final class MainViewController: BaseViewController<MainView> {
         registerViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: registerViewController)
-        NavigationManager.shared.presentVC(navigationController)
+        NavigationManager.shared.pushVC(navigationController, animated: true)
     }
     
     @objc
@@ -228,7 +230,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let type = userCategories[indexPath.row]
             
             cell.title.text = type.categoryName
-            cell.icon.image = UIImage(systemName: type.iconName)
+            cell.icon.image = UIImage(systemName: type.iconName)?.withTintColor(.white)
             cell.iconBackground.backgroundColor = UIColor.hexToColor(type.backgroundColor)
             
             let count = type.todos.count
