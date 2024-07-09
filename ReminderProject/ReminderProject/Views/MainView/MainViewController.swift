@@ -120,7 +120,7 @@ final class MainViewController: BaseViewController<MainView> {
     func rightBarButtonTapped() {
         let todoSearchViewController = TodoSearchViewController(baseView: TodoSearchView())
         
-        NavigationManager.shared.presentVC(todoSearchViewController, animated: true)
+        NavigationManager.shared.pushVC(todoSearchViewController, animated: true)
     }
     
     
@@ -131,7 +131,7 @@ final class MainViewController: BaseViewController<MainView> {
         registerViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: registerViewController)
-        NavigationManager.shared.pushVC(navigationController, animated: true)
+        NavigationManager.shared.presentVC(navigationController, animated: true)
     }
     
     @objc
